@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 import org.usfirst.frc.team1165.robot.subsystems.AirCompressor;
+import org.usfirst.frc.team1165.robot.subsystems.ServoSystem;
 import org.usfirst.frc.team1165.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team1165.robot.subsystems.Shooter;
 
@@ -20,6 +21,7 @@ public class Robot extends IterativeRobot
 	public static Pneumatics pneumatics;
 	public static AirCompressor airCompressor;
 	public static Shooter shooter;
+	public static ServoSystem servoSystem;
 
 	public static OI oi;
 
@@ -34,6 +36,7 @@ public class Robot extends IterativeRobot
     	pneumatics = new Pneumatics();
     	airCompressor = new AirCompressor();
     	shooter = new Shooter();
+    	servoSystem = new ServoSystem();
     	
 		oi = new OI();
         // instantiate the command used for the autonomous period
@@ -45,6 +48,7 @@ public class Robot extends IterativeRobot
     	pneumatics.report();
     	airCompressor.report();
     	shooter.report();
+    	servoSystem.report();
 
     	oi.report();
     }

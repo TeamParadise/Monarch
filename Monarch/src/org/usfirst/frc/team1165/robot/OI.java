@@ -8,9 +8,11 @@ import org.usfirst.frc.team1165.robot.commands.CloseArms;
 import org.usfirst.frc.team1165.robot.commands.ExtendClimber;
 import org.usfirst.frc.team1165.robot.commands.ExtendKicker;
 import org.usfirst.frc.team1165.robot.commands.Shoot;
+import org.usfirst.frc.team1165.robot.commands.SpitCube;
 import org.usfirst.frc.team1165.robot.commands.OpenArms;
 import org.usfirst.frc.team1165.robot.commands.RetractClimber;
 import org.usfirst.frc.team1165.robot.commands.RetractKicker;
+import org.usfirst.frc.team1165.robot.commands.RunServo;
 import org.usfirst.frc.team1165.robot.commands.Intake;
 
 /**
@@ -26,12 +28,17 @@ public class OI
     
 	private Button extendKicker = new JoystickButton(stick, RobotMap.EXTEND_KICKER_BUTTON);
 	private Button retractKicker = new JoystickButton(stick, RobotMap.RETRACT_KICKER_BUTTON);
+	
+	private Button spitCube = new JoystickButton(stick, RobotMap.SPIT_CUBE_BUTTON);
     
 	private Button extendClimber = new JoystickButton(stick, RobotMap.EXTEND_CLIMBER_BUTTON);
 	private Button retractClimber = new JoystickButton(stick, RobotMap.RETRACT_CLIMBER_BUTTON);
     
     private Button intake = new JoystickButton(stick, RobotMap.INTAKE_BUTTON);
     private Button shoot = new JoystickButton(stick, RobotMap.SHOOT_BUTTON);
+    
+    private Button servoButton1 = new JoystickButton(stick, RobotMap.SERVO_BUTTON_1);
+    private Button servoButton2 = new JoystickButton(stick, RobotMap.SERVO_BUTTON_2);
     
     public OI()
     {
@@ -41,11 +48,16 @@ public class OI
     	extendKicker.whenPressed(new ExtendKicker());
     	retractKicker.whenPressed(new RetractKicker());
     	
+    	spitCube.whenPressed(new SpitCube()); // for brennen/luke
+    	
     	extendClimber.whenPressed(new ExtendClimber());
-    	retractClimber.whenPressed(new RetractClimber());
+    	retractClimber.whenPressed(new RetractClimber()); // for zach
     	
     	intake.whenPressed(new Intake());
     	shoot.whenPressed(new Shoot());
+    	
+    	servoButton1.whenPressed(new RunServo(60));
+    	servoButton2.whenPressed(new RunServo(120));
     }
     
     public boolean intakeButton() {
@@ -54,6 +66,10 @@ public class OI
     
     public boolean shootButton() {
     	return shoot.get();
+    }
+    
+    public boolean spitCubeButton() {
+    	return spitCube.get();
     }
     
     public void report()

@@ -10,6 +10,8 @@ public class RobotMap
 
 	public static final int RIGHT_SHOOTER_PORT = 2;
 	public static final int LEFT_SHOOTER_PORT = 3;
+	
+	public static final int SERVO_PORT = 0;
 
 	public static final int RIGHT_ENCODER_PORT_1 = 0;
 	public static final int RIGHT_ENCODER_PORT_2 = 1;
@@ -32,10 +34,15 @@ public class RobotMap
 	public static final int EXTEND_KICKER_BUTTON = 9;
 	public static final int RETRACT_KICKER_BUTTON = 10;
 	
+	public static final int SPIT_CUBE_BUTTON = 2;
+	
 	public static final int EXTEND_CLIMBER_BUTTON = 3;
 	public static final int RETRACT_CLIMBER_BUTTON = 4;
 
 	public static final int INTAKE_BUTTON = 11;
 	public static final int SHOOT_BUTTON = 12;
+	
+	public static final int SERVO_BUTTON_1 = 5;
+	public static final int SERVO_BUTTON_2 = 6;
 
 }
