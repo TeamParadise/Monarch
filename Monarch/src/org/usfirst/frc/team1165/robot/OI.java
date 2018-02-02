@@ -3,14 +3,18 @@ package org.usfirst.frc.team1165.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1165.robot.commands.CloseArms;
 import org.usfirst.frc.team1165.robot.commands.ExtendClimber;
+import org.usfirst.frc.team1165.robot.commands.AirToKicker;
 import org.usfirst.frc.team1165.robot.commands.ExtendKicker;
 import org.usfirst.frc.team1165.robot.commands.Shoot;
 import org.usfirst.frc.team1165.robot.commands.SpitCube;
+import org.usfirst.frc.team1165.robot.commands.commandgroups.StageCubeGroup;
 import org.usfirst.frc.team1165.robot.commands.OpenArms;
 import org.usfirst.frc.team1165.robot.commands.RetractClimber;
+import org.usfirst.frc.team1165.robot.commands.IsolateKicker;
 import org.usfirst.frc.team1165.robot.commands.RetractKicker;
 import org.usfirst.frc.team1165.robot.commands.RunServo;
 import org.usfirst.frc.team1165.robot.commands.Intake;
@@ -28,7 +32,7 @@ public class OI
     
 	private Button extendKicker = new JoystickButton(stick, RobotMap.EXTEND_KICKER_BUTTON);
 	private Button retractKicker = new JoystickButton(stick, RobotMap.RETRACT_KICKER_BUTTON);
-	
+    
 	private Button spitCube = new JoystickButton(stick, RobotMap.SPIT_CUBE_BUTTON);
     
 	private Button extendClimber = new JoystickButton(stick, RobotMap.EXTEND_CLIMBER_BUTTON);
@@ -42,6 +46,7 @@ public class OI
     
     public OI()
     {
+    	
     	openArms.whenPressed(new OpenArms());
     	closeArms.whenPressed(new CloseArms());
     	
@@ -58,6 +63,30 @@ public class OI
     	
     	servoButton1.whenPressed(new RunServo(60));
     	servoButton2.whenPressed(new RunServo(120));
+    	
+    	SmartDashboard.putNumber("Servo Target Angle", 60);
+    	
+    	SmartDashboard.putData(new OpenArms());
+    	SmartDashboard.putData(new CloseArms());
+    	
+    	SmartDashboard.putData(new ExtendKicker());
+    	SmartDashboard.putData(new RetractKicker());
+    	
+    	SmartDashboard.putData(new AirToKicker());
+    	SmartDashboard.putData(new IsolateKicker());
+    	
+    	SmartDashboard.putData(new SpitCube());
+    	SmartDashboard.putData(new StageCubeGroup());
+    	
+    	SmartDashboard.putData(new ExtendClimber());
+    	SmartDashboard.putData(new RetractClimber());
+    	
+    	SmartDashboard.putData(new Intake());
+    	SmartDashboard.putData(new Shoot());
+    	
+    	SmartDashboard.putData("Run Servo", new RunServo(60));
+    	
+//    	SmartDashboard.putData("Run Servo", new RunServo(120));
     }
     
     public boolean intakeButton() {

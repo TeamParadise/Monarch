@@ -20,20 +20,25 @@ public class RobotMap
 	
 	public static final int PCM_1 = 1;
 	
-	public static final int SOLENOID_ARM_EXTEND_PORT = 2;
-	public static final int SOLENOID_ARM_RETRACT_PORT = 3;
+	public static final int SOLENOID_KICKER_ISOLATED_PORT = 2;
+	public static final int SOLENOID_KICKER_AVAILABLE_PORT = 3;
+	
+	public static final int SOLENOID_ARM_EXTEND_PORT = 4;
+	public static final int SOLENOID_ARM_RETRACT_PORT = 5;
 	
 	public static final int SOLENOID_KICKER_EXTEND_PORT = 6;
 	public static final int SOLENOID_KICKER_RETRACT_PORT = 7;
 
 	public static final int JOYSTICK_PORT = 0;
 
+	////////////////////////////////////////// BUTTONS //////////////////////////////////////////
+	
 	public static final int CLOSE_ARMS_BUTTON = 7;
 	public static final int OPEN_ARMS_BUTTON = 8;
 
 	public static final int EXTEND_KICKER_BUTTON = 9;
 	public static final int RETRACT_KICKER_BUTTON = 10;
-	
+
 	public static final int SPIT_CUBE_BUTTON = 2;
 	
 	public static final int EXTEND_CLIMBER_BUTTON = 3;

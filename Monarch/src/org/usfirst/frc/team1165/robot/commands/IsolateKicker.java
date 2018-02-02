@@ -2,26 +2,21 @@
 package org.usfirst.frc.team1165.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1165.robot.Robot;
 
 /**
  *
  */
-public class RunServo extends Command {
+public class IsolateKicker extends Command {
 
-	private double targetAngle;
-	
-    public RunServo(double targetAngle) {
-    	this.targetAngle = targetAngle;
-        requires(Robot.servoSystem);
+    public IsolateKicker() {
+        requires(Robot.pneumatics);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-//    	Robot.servoSystem.setServoAngle(targetAngle);
-    	Robot.servoSystem.setServoAngle(SmartDashboard.getNumber("Servo Target Angle", 60));
+    	Robot.pneumatics.isolateKicker();
     }
 
     // Called repeatedly when this Command is scheduled to run

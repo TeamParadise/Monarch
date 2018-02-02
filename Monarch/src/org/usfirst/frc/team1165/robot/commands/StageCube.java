@@ -9,22 +9,35 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class SpitCube extends Command
+public class StageCube extends Command
 {
 	private Timer timer1;
 	
-	public SpitCube()
+	private double extendTime;
+	private double airToKicker;
+	private double taskDone;
+
+	private boolean debug = true;
+
+	public StageCube()
 	{
 		requires(Robot.pneumatics);
 		requires(Robot.shooter);
-		
+
 		timer1 = new Timer();
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
+		
+		extendTime = 0.1;
+		airToKicker = 0.2;
+		taskDone = 0.3;
+		
+		// DriverStation.reportWarning("spit", false);
 		timer1.start();
+		if (debug) DriverStation.reportWarning("Isolate", false);
 		Robot.pneumatics.isolateKicker();
 	}
 
@@ -32,7 +45,16 @@ public class SpitCube extends Command
 	protected void execute()
 	{
 		// Robot.shooter.shoot();
-		if(timer1.hasPeriodPassed(0.1)) {
+		if (timer1.hasPeriodPassed(extendTime))
+		{
+			extendTime = 9999;
+			if (debug) DriverStation.reportWarning("Extend - isolated", false);
+			Robot.pneumatics.extendKicker();
+		}
+		if (timer1.hasPeriodPassed(airToKicker))
+		{
+			airToKicker = 9999;
+			if (debug) DriverStation.reportWarning("Extend", false);
 			Robot.pneumatics.airToKicker();
 		}
 	}
@@ -40,12 +62,13 @@ public class SpitCube extends Command
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished()
 	{
-		return timer1.hasPeriodPassed(0.175);
+		return timer1.hasPeriodPassed(taskDone); // !Robot.oi.spitCubeButton();
 	}
 
 	// Called once after isFinished returns true
 	protected void end()
 	{
+		if (debug) DriverStation.reportWarning("Complete", false);
 		Robot.shooter.stop();
 	}
 
