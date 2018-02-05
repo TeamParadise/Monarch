@@ -12,26 +12,41 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AirCompressor extends Subsystem
 {
-	private Compressor compressor = new Compressor(RobotMap.PCM_1);
+	private Compressor compressor;
+
+	public AirCompressor()
+	{
+		compressor = new Compressor(RobotMap.PCM_1);
+	}
 
 	@Override
-    public void initDefaultCommand() {
-    }
-    
-    public void start()
-    {
-    	compressor.start();
-    }
-    
-    public void stop()
-    {
-    	compressor.stop();
-    }
-    
-    public void report()
-    {
-    	SmartDashboard.putBoolean("Compressor On", compressor.enabled());
-    	SmartDashboard.putNumber("Compressor Current", compressor.getCompressorCurrent());
-    }
-}
+	public void initDefaultCommand()
+	{
+	}
 
+	public void start()
+	{
+		compressor.start();
+	}
+
+	public void stop()
+	{
+		compressor.stop();
+	}
+
+	public boolean isEnabled()
+	{
+		return compressor.enabled();
+	}
+
+	public double getCurrent()
+	{
+		return compressor.getCompressorCurrent();
+	}
+
+	public void report()
+	{
+		SmartDashboard.putBoolean("Compressor On", isEnabled());
+		SmartDashboard.putNumber("Compressor Current", getCurrent());
+	}
+}

@@ -12,12 +12,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SpitCube extends Command
 {
 	private Timer timer1;
-	
+
 	public SpitCube()
 	{
 		requires(Robot.pneumatics);
 		requires(Robot.shooter);
-		
+
 		timer1 = new Timer();
 	}
 
@@ -32,7 +32,8 @@ public class SpitCube extends Command
 	protected void execute()
 	{
 		// Robot.shooter.shoot();
-		if(timer1.hasPeriodPassed(0.1)) {
+		if (timer1.hasPeriodPassed(0.1))
+		{
 			Robot.pneumatics.airToKicker();
 		}
 	}

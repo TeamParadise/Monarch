@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class StageCube extends Command
 {
 	private Timer timer1;
-	
+
 	private double extendTime;
 	private double airToKicker;
 	private double taskDone;
@@ -30,14 +30,15 @@ public class StageCube extends Command
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
-		
+
 		extendTime = 0.1;
 		airToKicker = 0.2;
 		taskDone = 0.3;
-		
+
 		// DriverStation.reportWarning("spit", false);
 		timer1.start();
-		if (debug) DriverStation.reportWarning("Isolate", false);
+		if (debug)
+			DriverStation.reportWarning("Isolate", false);
 		Robot.pneumatics.isolateKicker();
 	}
 
@@ -48,13 +49,15 @@ public class StageCube extends Command
 		if (timer1.hasPeriodPassed(extendTime))
 		{
 			extendTime = 9999;
-			if (debug) DriverStation.reportWarning("Extend - isolated", false);
+			if (debug)
+				DriverStation.reportWarning("Extend - isolated", false);
 			Robot.pneumatics.extendKicker();
 		}
 		if (timer1.hasPeriodPassed(airToKicker))
 		{
 			airToKicker = 9999;
-			if (debug) DriverStation.reportWarning("Extend", false);
+			if (debug)
+				DriverStation.reportWarning("Extend", false);
 			Robot.pneumatics.airToKicker();
 		}
 	}
@@ -68,7 +71,8 @@ public class StageCube extends Command
 	// Called once after isFinished returns true
 	protected void end()
 	{
-		if (debug) DriverStation.reportWarning("Complete", false);
+		if (debug)
+			DriverStation.reportWarning("Complete", false);
 		Robot.shooter.stop();
 	}
 

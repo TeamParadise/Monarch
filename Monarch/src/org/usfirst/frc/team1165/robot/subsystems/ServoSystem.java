@@ -18,18 +18,17 @@ public class ServoSystem extends Subsystem
 		servo = new Servo(RobotMap.SERVO_PORT);
 	}
 
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
+	public void initDefaultCommand()
+	{
+	}
 
-    public void setServoAngle(double angle) {
-    	servo.setAngle(angle);
-    }
+	public void setServoAngle(double angle)
+	{
+		servo.setAngle(angle);
+	}
 
-    public void report()
-    {
-    	SmartDashboard.putNumber("Servo Angle", servo.getAngle());
-    }
+	public void report()
+	{
+		SmartDashboard.putNumber("Servo Angle", servo.getAngle());
+	}
 }
-
