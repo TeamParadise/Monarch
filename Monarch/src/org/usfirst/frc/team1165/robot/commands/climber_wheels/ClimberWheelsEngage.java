@@ -1,25 +1,26 @@
 
-package org.usfirst.frc.team1165.robot.commands;
+package org.usfirst.frc.team1165.robot.commands.climber_wheels;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team1165.robot.Robot;
+import org.usfirst.frc.team1165.robot.subsystems.ClimberWheels;
 
 /**
  *
  */
-public class RetractKicker extends Command
+public class ClimberWheelsEngage extends Command
 {
-
-	public RetractKicker()
+	private ClimberWheels mClimberWheels = ClimberWheels.getInstance();
+	
+	public ClimberWheelsEngage()
 	{
-		requires(Robot.pneumatics);
+		requires(mClimberWheels);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
-		Robot.pneumatics.retractKicker();
+		mClimberWheels.engage();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

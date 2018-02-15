@@ -1,25 +1,26 @@
 
-package org.usfirst.frc.team1165.robot.commands;
+package org.usfirst.frc.team1165.robot.commands.front_shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team1165.robot.Robot;
+import org.usfirst.frc.team1165.robot.subsystems.FrontShooter;
 
 /**
  *
  */
-public class RetractClimber extends Command
+public class FrontShooterTwistLeft extends Command
 {
-
-	public RetractClimber()
+	private FrontShooter mFrontShooter = FrontShooter.getInstance();
+	
+	public FrontShooterTwistLeft()
 	{
-		requires(Robot.pneumatics);
+		requires(mFrontShooter);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
-		Robot.pneumatics.retractClimber();
+		mFrontShooter.twistLeft();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

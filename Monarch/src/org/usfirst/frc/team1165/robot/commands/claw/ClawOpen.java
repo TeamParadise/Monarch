@@ -1,25 +1,26 @@
 
-package org.usfirst.frc.team1165.robot.commands;
+package org.usfirst.frc.team1165.robot.commands.claw;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team1165.robot.Robot;
+import org.usfirst.frc.team1165.robot.subsystems.Claw;
 
 /**
  *
  */
-public class IsolateKicker extends Command
+public class ClawOpen extends Command
 {
-
-	public IsolateKicker()
+	private Claw mClaw = Claw.getInstance();
+	
+	public ClawOpen()
 	{
-		requires(Robot.pneumatics);
+		requires(mClaw);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
-		Robot.pneumatics.isolateKicker();
+		mClaw.open();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

@@ -1,109 +1,118 @@
 package org.usfirst.frc.team1165.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
+import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeIdle;
+import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeIntake;
+import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeOpen;
+import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeSpit;
+import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeStageIntake;
+import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeStore;
+import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeTwistLeft;
+import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeTwistRight;
+import org.usfirst.frc.team1165.robot.commands.claw.ClawIdle;
+
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team1165.robot.commands.CloseArms;
-import org.usfirst.frc.team1165.robot.commands.ExtendClimber;
-import org.usfirst.frc.team1165.robot.commands.AirToKicker;
-import org.usfirst.frc.team1165.robot.commands.ExtendKicker;
-import org.usfirst.frc.team1165.robot.commands.Shoot;
-import org.usfirst.frc.team1165.robot.commands.SpitCube;
-import org.usfirst.frc.team1165.robot.commands.commandgroups.StageCubeGroup;
-import org.usfirst.frc.team1165.robot.commands.OpenArms;
-import org.usfirst.frc.team1165.robot.commands.RetractClimber;
-import org.usfirst.frc.team1165.robot.commands.IsolateKicker;
-import org.usfirst.frc.team1165.robot.commands.RetractKicker;
-import org.usfirst.frc.team1165.robot.commands.RunServo;
-import org.usfirst.frc.team1165.robot.commands.RunServoDashboard;
-import org.usfirst.frc.team1165.robot.commands.Intake;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
+ * 
+ * @author Kesav Kadalazhi
  */
 public class OI
 {
-	private Joystick stick = new Joystick(RobotMap.JOYSTICK_PORT);
+	// private Joystick stick = new Joystick(1);
 
-	private Button openArms = new JoystickButton(stick, RobotMap.OPEN_ARMS_BUTTON);
-	private Button closeArms = new JoystickButton(stick, RobotMap.CLOSE_ARMS_BUTTON);
+	// /*
+	private XboxController mController = new XboxController(1);
 
-	private Button extendKicker = new JoystickButton(stick, RobotMap.EXTEND_KICKER_BUTTON);
-	private Button retractKicker = new JoystickButton(stick, RobotMap.RETRACT_KICKER_BUTTON);
-
-	private Button spitCube = new JoystickButton(stick, RobotMap.SPIT_CUBE_BUTTON);
-
-	private Button extendClimber = new JoystickButton(stick, RobotMap.EXTEND_CLIMBER_BUTTON);
-	private Button retractClimber = new JoystickButton(stick, RobotMap.RETRACT_CLIMBER_BUTTON);
-
-	private Button intake = new JoystickButton(stick, RobotMap.INTAKE_BUTTON);
-	private Button shoot = new JoystickButton(stick, RobotMap.SHOOT_BUTTON);
-
-	private Button servoButton1 = new JoystickButton(stick, RobotMap.SERVO_BUTTON_1);
-	private Button servoButton2 = new JoystickButton(stick, RobotMap.SERVO_BUTTON_2);
+	private JoystickButton mButtonA = new JoystickButton(mController, 1);
+	private JoystickButton mButtonB = new JoystickButton(mController, 2);
+	private JoystickButton mButtonX = new JoystickButton(mController, 3);
+	private JoystickButton mButtonY = new JoystickButton(mController, 4);
+	private JoystickButton mButtonLB = new JoystickButton(mController, 5);
+	private JoystickButton mButtonRB = new JoystickButton(mController, 6);
+	private JoystickButton mButtonLeftStick = new JoystickButton(mController, 9);
+	private JoystickButton mButtonRightStick = new JoystickButton(mController, 10);
 
 	public OI()
 	{
+		// mButtonA.whenPressed(new FrontShooterIdle());
+		// mButtonB.whenPressed(new FrontShooterIntake());
+		// mButtonX.whenPressed(new FrontShooterEject());
+		// mButtonY.whenPressed(new FrontShooterTwistRight());
+		// mButtonLB.whenPressed(new FrontShooterTwistLeft());
 
-		openArms.whenPressed(new OpenArms());
-		closeArms.whenPressed(new CloseArms());
+		// mButtonA.whenPressed(new RearShooterIdle());
+		// mButtonB.whenPressed(new RearShooterIntake());
+		// mButtonX.whenPressed(new RearShooterEject());
 
-		extendKicker.whenPressed(new ExtendKicker());
-		retractKicker.whenPressed(new RetractKicker());
+//		 mButtonA.whenPressed(new ClawIdle());
+		// mButtonB.whenPressed(new ClawOpen()); // extend
+		// mButtonX.whenPressed(new ClawClose()); // retract
 
-		spitCube.whenPressed(new SpitCube()); // for brennen/luke
+		// mButtonY.whenPressed(new ClimberPistonIdle());
+		// mButtonLB.whenPressed(new ClimberPistonExtend());
+		// mButtonRB.whenPressed(new ClimberPistonRetract());
+		//
+		// mButtonY.whenPressed(new ClimberIsolateIdle());
+		// mButtonLB.whenPressed(new ClimberIsolateIsolate());
+		// mButtonRB.whenPressed(new ClimberIsolateFire());
 
-		extendClimber.whenPressed(new ExtendClimber());
-		retractClimber.whenPressed(new RetractClimber()); // for zach
-
-		intake.whenPressed(new Intake());
-		shoot.whenPressed(new Shoot());
-
-		servoButton1.whenPressed(new RunServo(60));
-		servoButton2.whenPressed(new RunServo(120));
-
-		SmartDashboard.putData(new OpenArms());
-		SmartDashboard.putData(new CloseArms());
-
-		SmartDashboard.putData(new ExtendKicker());
-		SmartDashboard.putData(new RetractKicker());
-
-		SmartDashboard.putData(new AirToKicker());
-		SmartDashboard.putData(new IsolateKicker());
-
-		SmartDashboard.putData(new SpitCube());
-		SmartDashboard.putData(new StageCubeGroup());
-
-		SmartDashboard.putData(new ExtendClimber());
-		SmartDashboard.putData(new RetractClimber());
-
-		SmartDashboard.putData(new Intake());
-		SmartDashboard.putData(new Shoot());
-
-		SmartDashboard.putNumber("Servo Target Angle", 60);
-
-		SmartDashboard.putData(new RunServoDashboard());
-	}
-
-	public boolean intakeButton()
-	{
-		return intake.get();
-	}
-
-	public boolean shootButton()
-	{
-		return shoot.get();
-	}
-
-	public boolean spitCubeButton()
-	{
-		return spitCube.get();
+		mButtonA.whenPressed(new IntakeIdle());
+		mButtonB.whenPressed(new IntakeIntake());
+		mButtonX.whenPressed(new IntakeOpen());
+		mButtonY.whenPressed(new IntakeSpit());
+		mButtonLB.whenPressed(new IntakeStageIntake());
+		mButtonRB.whenPressed(new IntakeStore());
+		mButtonLeftStick.whenPressed(new IntakeTwistLeft());
+		mButtonRightStick.whenPressed(new IntakeTwistRight());
+		//
+		// mButtonY.whenPressed(new ExecuteState(ClimberWheelsState.IDLE));
+		// mButtonLB.whenPressed(new ExecuteState(ClimberWheelsState.ENGAGE));
+		// mButtonRB.whenPressed(new
+		// ExecuteState(ClimberWheelsState.DISENGAGE));
+		//
+		// mButtonLeftStick.whenPressed(new ExecuteState(IntakeState.STORE));
+		// mButtonRightStick.whenPressed(new ExecuteState(IntakeState.SPIT));
 	}
 
 	public void report()
 	{
+		SmartDashboard.putNumber("Controller Right Y", getRightY());
+		SmartDashboard.putNumber("Controller Left Y", getLeftY());
 	}
+
+	// */
+	public double getRightY()
+	{
+		return dampen(mController.getY(Hand.kRight));
+	}
+
+	public double getLeftY()
+	{
+		return dampen(-mController.getY(Hand.kLeft));
+	}
+
+	public double getTwist()
+	{
+		return 0;
+		// return dampen(stick.getTwist());
+	}
+
+	public double dampen(double value)
+	{
+		double damped = Math.pow(value, 3);
+		return Math.abs(damped) < 0.1 ? 0 : damped;
+	}
+
+	// public void report()
+	// {
+	// SmartDashboard.putNumber("OI X", getX());
+	// SmartDashboard.putNumber("OI Y", getY());
+	// SmartDashboard.putNumber("OI Twist", getTwist());
+	// }
+
 }

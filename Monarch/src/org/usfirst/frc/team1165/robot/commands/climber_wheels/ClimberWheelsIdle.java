@@ -1,25 +1,26 @@
 
-package org.usfirst.frc.team1165.robot.commands;
+package org.usfirst.frc.team1165.robot.commands.climber_wheels;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team1165.robot.Robot;
+import org.usfirst.frc.team1165.robot.subsystems.ClimberWheels;
 
 /**
  *
  */
-public class CloseArms extends Command
+public class ClimberWheelsIdle extends Command
 {
-
-	public CloseArms()
+	private ClimberWheels mClimberWheels = ClimberWheels.getInstance();
+	
+	public ClimberWheelsIdle()
 	{
-		requires(Robot.pneumatics);
+		requires(mClimberWheels);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
-		Robot.pneumatics.closeArms();
+		mClimberWheels.idle();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

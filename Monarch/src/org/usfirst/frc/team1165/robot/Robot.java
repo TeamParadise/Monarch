@@ -4,11 +4,6 @@ package org.usfirst.frc.team1165.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
-import org.usfirst.frc.team1165.robot.subsystems.AirCompressor;
-import org.usfirst.frc.team1165.robot.subsystems.ServoSystem;
-import org.usfirst.frc.team1165.robot.subsystems.Pneumatics;
-import org.usfirst.frc.team1165.robot.subsystems.Shooter;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -18,14 +13,11 @@ import org.usfirst.frc.team1165.robot.subsystems.Shooter;
  */
 public class Robot extends IterativeRobot
 {
-	public static Pneumatics pneumatics;
-	public static AirCompressor airCompressor;
-	public static Shooter shooter;
-	public static ServoSystem servoSystem;
+	private static final SubsystemManager mManager = new SubsystemManager();
+	
+//	private static final OI mOI = new OI();
 
-	public static OI oi;
-
-	// Command autonomousCommand;
+//	Command autonomousCommand;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -33,24 +25,15 @@ public class Robot extends IterativeRobot
 	 */
 	public void robotInit()
 	{
-		pneumatics = new Pneumatics();
-		airCompressor = new AirCompressor();
-		shooter = new Shooter();
-		servoSystem = new ServoSystem();
-
-		oi = new OI();
-		// instantiate the command used for the autonomous period
-		// autonomousCommand = new ExtendPistons();
+		mManager.putCommandChooser();
 	}
 
 	public void robotPeriodic()
 	{
-		pneumatics.report();
-		airCompressor.report();
-		shooter.report();
-		servoSystem.report();
+//		mOI.report();
 
-		oi.report();
+		mManager.report();
+		mManager.putSelectedCommand();
 	}
 
 	public void disabledPeriodic()
@@ -97,7 +80,6 @@ public class Robot extends IterativeRobot
 	 */
 	public void teleopPeriodic()
 	{
-		oi.report();
 		Scheduler.getInstance().run();
 	}
 

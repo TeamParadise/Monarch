@@ -1,29 +1,26 @@
 
-package org.usfirst.frc.team1165.robot.commands;
+package org.usfirst.frc.team1165.robot.commands.climber_isolate;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team1165.robot.Robot;
+import org.usfirst.frc.team1165.robot.subsystems.ClimberIsolate;
 
 /**
  *
  */
-public class RunServo extends Command
+public class ClimberIsolateIsolate extends Command
 {
-
-	private double targetAngle;
-
-	public RunServo(double targetAngle)
+	private ClimberIsolate mClimberIsolate = ClimberIsolate.getInstance();
+	
+	public ClimberIsolateIsolate()
 	{
-		this.targetAngle = targetAngle;
-
-		requires(Robot.servoSystem);
+		requires(mClimberIsolate);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
-		Robot.servoSystem.setServoAngle(targetAngle);
+		mClimberIsolate.idle();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

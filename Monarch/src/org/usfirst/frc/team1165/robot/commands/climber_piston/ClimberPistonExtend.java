@@ -1,25 +1,26 @@
 
-package org.usfirst.frc.team1165.robot.commands;
+package org.usfirst.frc.team1165.robot.commands.climber_piston;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team1165.robot.Robot;
+import org.usfirst.frc.team1165.robot.subsystems.ClimberPiston;
 
 /**
  *
  */
-public class OpenArms extends Command
+public class ClimberPistonExtend extends Command
 {
-
-	public OpenArms()
+	private ClimberPiston mClimberPiston = ClimberPiston.getInstance();
+	
+	public ClimberPistonExtend()
 	{
-		requires(Robot.pneumatics);
+		requires(mClimberPiston);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
-		Robot.pneumatics.openArms();
+		mClimberPiston.extend();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

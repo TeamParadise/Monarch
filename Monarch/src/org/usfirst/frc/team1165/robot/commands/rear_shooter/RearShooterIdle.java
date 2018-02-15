@@ -1,25 +1,26 @@
 
-package org.usfirst.frc.team1165.robot.commands;
+package org.usfirst.frc.team1165.robot.commands.rear_shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team1165.robot.Robot;
+import org.usfirst.frc.team1165.robot.subsystems.RearShooter;
 
 /**
  *
  */
-public class ExtendClimber extends Command
+public class RearShooterIdle extends Command
 {
-
-	public ExtendClimber()
+	private RearShooter mRearShooter = RearShooter.getInstance();
+	
+	public RearShooterIdle()
 	{
-		requires(Robot.pneumatics);
+		requires(mRearShooter);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
-		Robot.pneumatics.extendClimber();
+		mRearShooter.idle();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

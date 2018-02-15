@@ -1,25 +1,26 @@
 
-package org.usfirst.frc.team1165.robot.commands;
+package org.usfirst.frc.team1165.robot.commands.claw;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team1165.robot.Robot;
+import org.usfirst.frc.team1165.robot.subsystems.Claw;
 
 /**
  *
  */
-public class AirToKicker extends Command
+public class ClawIdle extends Command
 {
-
-	public AirToKicker()
+	private Claw mClaw = Claw.getInstance();
+	
+	public ClawIdle()
 	{
-		requires(Robot.pneumatics);
+		requires(mClaw);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
-		Robot.pneumatics.airToKicker();
+		mClaw.idle();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
