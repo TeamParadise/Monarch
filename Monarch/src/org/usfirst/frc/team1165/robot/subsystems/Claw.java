@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team1165.robot.subsystems;
 
 import java.util.ArrayList;
@@ -37,27 +36,16 @@ public class Claw extends StateMachine
 {
 	private static final Claw mInstance = new Claw();
 
+	public synchronized static Claw getInstance()
+	{
+		return mInstance;
+	}
+
 	private DoubleSolenoid mClawSolenoid = new DoubleSolenoid(RobotMap.PCM_1, RobotMap.SOLENOID_ARM_EXTEND_PORT,
 			RobotMap.SOLENOID_ARM_RETRACT_PORT);
 
 	protected Claw()
 	{
-	}
-
-	public void idle()
-	{
-		reportState("Idle");
-		mInstance.mClawSolenoid.set(Value.kOff);
-	}
-
-	public void open()
-	{
-		reportState("Open");
-		mClawSolenoid.set(Value.kReverse);
-
-		sleep(60);
-
-		mInstance.mClawSolenoid.set(Value.kOff);
 	}
 
 	public void close()
@@ -68,11 +56,6 @@ public class Claw extends StateMachine
 		sleep(60);
 
 		mInstance.mClawSolenoid.set(Value.kOff);
-	}
-
-	public synchronized static Claw getInstance()
-	{
-		return mInstance;
 	}
 
 	@Override
@@ -92,11 +75,25 @@ public class Claw extends StateMachine
 		return new ClawIdle();
 	}
 
+	public void idle()
+	{
+		reportState("Idle");
+		mInstance.mClawSolenoid.set(Value.kOff);
+	}
+
+	public void open()
+	{
+		reportState("Open");
+		mClawSolenoid.set(Value.kReverse);
+
+		sleep(60);
+
+		mInstance.mClawSolenoid.set(Value.kOff);
+	}
+
 	@Override
 	public void report()
 	{
-		super.report();
-
 		SmartDashboard.putString("Claw Piston", mClawSolenoid.get().toString());
 	}
 }

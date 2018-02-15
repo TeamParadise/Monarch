@@ -13,10 +13,20 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RotaryLiftIdle extends Command
 {
 	private RotaryLiftPID mRotaryLiftPID = RotaryLiftPID.getInstance();
-	
+
 	public RotaryLiftIdle()
 	{
 		requires(mRotaryLiftPID);
+	}
+
+	// Called once after isFinished returns true
+	protected void end()
+	{
+	}
+
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute()
+	{
 	}
 
 	// Called just before this Command runs the first time
@@ -26,8 +36,9 @@ public class RotaryLiftIdle extends Command
 		mRotaryLiftPID.enable();
 	}
 
-	// Called repeatedly when this Command is scheduled to run
-	protected void execute()
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted()
 	{
 	}
 
@@ -35,16 +46,5 @@ public class RotaryLiftIdle extends Command
 	protected boolean isFinished()
 	{
 		return true;
-	}
-
-	// Called once after isFinished returns true
-	protected void end()
-	{
-	}
-
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
-	protected void interrupted()
-	{
 	}
 }

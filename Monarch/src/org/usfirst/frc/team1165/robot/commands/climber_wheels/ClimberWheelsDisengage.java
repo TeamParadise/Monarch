@@ -11,10 +11,20 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ClimberWheelsDisengage extends Command
 {
 	private ClimberWheels mClimberWheels = ClimberWheels.getInstance();
-	
+
 	public ClimberWheelsDisengage()
 	{
 		requires(mClimberWheels);
+	}
+
+	// Called once after isFinished returns true
+	protected void end()
+	{
+	}
+
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute()
+	{
 	}
 
 	// Called just before this Command runs the first time
@@ -23,8 +33,9 @@ public class ClimberWheelsDisengage extends Command
 		mClimberWheels.disengage();
 	}
 
-	// Called repeatedly when this Command is scheduled to run
-	protected void execute()
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted()
 	{
 	}
 
@@ -32,16 +43,5 @@ public class ClimberWheelsDisengage extends Command
 	protected boolean isFinished()
 	{
 		return true;
-	}
-
-	// Called once after isFinished returns true
-	protected void end()
-	{
-	}
-
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
-	protected void interrupted()
-	{
 	}
 }

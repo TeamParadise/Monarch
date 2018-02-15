@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team1165.robot.subsystems;
 
 import java.util.ArrayList;
@@ -36,22 +35,15 @@ public class ClimberWheels extends StateMachine
 {
 	private static final ClimberWheels mInstance = new ClimberWheels();
 
+	public synchronized static ClimberWheels getInstance()
+	{
+		return mInstance;
+	}
+
 	private Solenoid mClimberWheelsSolenoid = new Solenoid(RobotMap.PCM_1, RobotMap.SOLENOID_CLIMBER_WHEELS_PORT);
 
 	protected ClimberWheels()
 	{
-	}
-
-	public void idle()
-	{
-		reportState("Idle");
-		mClimberWheelsSolenoid.set(false);
-	}
-
-	public void engage()
-	{
-		reportState("Engage");
-		mClimberWheelsSolenoid.set(true);
 	}
 
 	public void disengage()
@@ -60,9 +52,10 @@ public class ClimberWheels extends StateMachine
 		mClimberWheelsSolenoid.set(false);
 	}
 
-	public synchronized static ClimberWheels getInstance()
+	public void engage()
 	{
-		return mInstance;
+		reportState("Engage");
+		mClimberWheelsSolenoid.set(true);
 	}
 
 	@Override
@@ -82,11 +75,15 @@ public class ClimberWheels extends StateMachine
 		return new ClimberWheelsIdle();
 	}
 
+	public void idle()
+	{
+		reportState("Idle");
+		mClimberWheelsSolenoid.set(false);
+	}
+
 	@Override
 	public void report()
 	{
-		super.report();
-
 		SmartDashboard.putBoolean("Climber Wheels Piston", mClimberWheelsSolenoid.get());
 	}
 }

@@ -1,15 +1,16 @@
 package org.usfirst.frc.team1165.robot;
 
-import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeIdle;
-import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeIntake;
-import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeOpen;
-import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeSpit;
-import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeStageIntake;
-import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeStore;
-import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeTwistLeft;
-import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeTwistRight;
-
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+
+import org.usfirst.frc.team1165.robot.commands.intake.IntakeIdle;
+import org.usfirst.frc.team1165.robot.commands.intake.IntakeIntake;
+import org.usfirst.frc.team1165.robot.commands.intake.IntakeOpen;
+import org.usfirst.frc.team1165.robot.commands.intake.IntakeSpit;
+import org.usfirst.frc.team1165.robot.commands.intake.IntakeStageIntake;
+import org.usfirst.frc.team1165.robot.commands.intake.IntakeStore;
+import org.usfirst.frc.team1165.robot.commands.intake.IntakeTwistLeft;
+import org.usfirst.frc.team1165.robot.commands.intake.IntakeTwistRight;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -48,7 +49,7 @@ public class OI
 		// mButtonB.whenPressed(new RearShooterIntake());
 		// mButtonX.whenPressed(new RearShooterEject());
 
-//		 mButtonA.whenPressed(new ClawIdle());
+		// mButtonA.whenPressed(new ClawIdle());
 		// mButtonB.whenPressed(new ClawOpen()); // extend
 		// mButtonX.whenPressed(new ClawClose()); // retract
 
@@ -78,10 +79,15 @@ public class OI
 		// mButtonRightStick.whenPressed(new ExecuteState(IntakeState.SPIT));
 	}
 
-	public void report()
+	public double dampen(double value)
 	{
-		SmartDashboard.putNumber("Controller Right Y", getRightY());
-		SmartDashboard.putNumber("Controller Left Y", getLeftY());
+		double damped = Math.pow(value, 3);
+		return Math.abs(damped) < 0.1 ? 0 : damped;
+	}
+
+	public double getLeftY()
+	{
+		return dampen(-mController.getY(Hand.kLeft));
 	}
 
 	// */
@@ -90,21 +96,16 @@ public class OI
 		return dampen(mController.getY(Hand.kRight));
 	}
 
-	public double getLeftY()
-	{
-		return dampen(-mController.getY(Hand.kLeft));
-	}
-
 	public double getTwist()
 	{
 		return 0;
 		// return dampen(stick.getTwist());
 	}
 
-	public double dampen(double value)
+	public void report()
 	{
-		double damped = Math.pow(value, 3);
-		return Math.abs(damped) < 0.1 ? 0 : damped;
+		SmartDashboard.putNumber("Controller Right Y", getRightY());
+		SmartDashboard.putNumber("Controller Left Y", getLeftY());
 	}
 
 	// public void report()

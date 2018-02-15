@@ -21,13 +21,13 @@ public class Lift implements Stateful
 {
 	private static final Lift mInstance = new Lift();
 
-	protected Lift()
-	{
-	}
-
 	public synchronized static Lift getInstance()
 	{
 		return mInstance;
+	}
+
+	protected Lift()
+	{
 	}
 
 	@Override

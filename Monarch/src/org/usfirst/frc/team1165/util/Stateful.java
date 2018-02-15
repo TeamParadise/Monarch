@@ -14,16 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 public interface Stateful
 {
 	/**
-	 * Gets a list of States(Commands) that will be added to the SmartDashboard
-	 */
-	public List<Command> getCommands();
-
-	/**
-	 * Returns the Default Command that will run on the Subsystem.
-	 */
-	public Command getIdleCommand();
-
-	/**
 	 * Returns a Command Chooser that is added to the SmartDashboard by
 	 * SubsystemManager.
 	 */
@@ -33,35 +23,30 @@ public interface Stateful
 
 		String subsystem = getClass().getSimpleName();
 
-		if(getIdleCommand() != null) {
+		if (getIdleCommand() != null)
+		{
 			chooser.addDefault(subsystem + " Idle", getIdleCommand());
 		}
-		for (Command state : getCommands()) {
-			if(state != null) {
+		for (Command state : getCommands())
+		{
+			if (state != null)
+			{
 				chooser.addObject(subsystem + " " + state, state);
 			}
 		}
-		
+
 		return chooser;
 	}
 
 	/**
-	 * Pauses a thread for a given time.
-	 * 
-	 * @param timeout
-	 *            how long to pause the thread
+	 * Gets a list of States(Commands) that will be added to the SmartDashboard
 	 */
-	public default void sleep(long timeout)
-	{
-		try
-		{
-			Thread.sleep(timeout);
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
-	}
+	public List<Command> getCommands();
+
+	/**
+	 * Returns the Default Command that will run on the Subsystem.
+	 */
+	public Command getIdleCommand();
 
 	/**
 	 * Method for reporting a subsystem. Called by SubsystemManager
@@ -77,6 +62,23 @@ public interface Stateful
 	public default void reportState(String state)
 	{
 		System.out.println("Setting " + getClass().getSimpleName() + " State: " + state);
+	}
+
+	/**
+	 * Pauses a thread for a given time.
+	 * 
+	 * @param timeout
+	 *            how long to pause the thread
+	 */
+	public default void sleep(long timeout)
+	{
+		try
+		{
+			Thread.sleep(timeout);
+		} catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 }

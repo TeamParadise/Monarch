@@ -3,14 +3,14 @@ package org.usfirst.frc.team1165.robot.subsystems.superstructures;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeIdle;
-import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeIntake;
-import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeOpen;
-import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeSpit;
-import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeStageIntake;
-import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeStore;
-import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeTwistLeft;
-import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeTwistRight;
+import org.usfirst.frc.team1165.robot.commands.intake.IntakeIdle;
+import org.usfirst.frc.team1165.robot.commands.intake.IntakeIntake;
+import org.usfirst.frc.team1165.robot.commands.intake.IntakeOpen;
+import org.usfirst.frc.team1165.robot.commands.intake.IntakeSpit;
+import org.usfirst.frc.team1165.robot.commands.intake.IntakeStageIntake;
+import org.usfirst.frc.team1165.robot.commands.intake.IntakeStore;
+import org.usfirst.frc.team1165.robot.commands.intake.IntakeTwistLeft;
+import org.usfirst.frc.team1165.robot.commands.intake.IntakeTwistRight;
 import org.usfirst.frc.team1165.util.Stateful;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -24,13 +24,13 @@ public class Intake implements Stateful
 {
 	private static final Intake mInstance = new Intake();
 
-	protected Intake()
-	{
-	}
-
 	public synchronized static Intake getInstance()
 	{
 		return mInstance;
+	}
+
+	protected Intake()
+	{
 	}
 
 	@Override

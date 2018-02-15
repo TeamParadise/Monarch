@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1165.robot.commandgroups.intake;
+package org.usfirst.frc.team1165.robot.commands.intake;
 
 import org.usfirst.frc.team1165.robot.commands.claw.ClawIdle;
 import org.usfirst.frc.team1165.robot.commands.front_shooter.FrontShooterIdle;

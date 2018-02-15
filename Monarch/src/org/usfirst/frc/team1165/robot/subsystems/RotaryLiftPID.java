@@ -19,14 +19,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class RotaryLiftPID extends StateMachinePID
 {
-	private static final RotaryLiftPID mInstance = new RotaryLiftPID();
-
-	// private WPI_TalonSRX mRotaryLiftMotor = new
-	// WPI_TalonSRX(RobotMap.ROTARY_LIFT_PORT);
-	private WPI_TalonSRX mRotaryLiftMotor = new WPI_TalonSRX(6);
-
-	// private Encoder mEncoder = new Encoder(0, 0, false, EncodingType.k4X);
-
 	/**
 	 * <p>
 	 * The Rotary Lift has 4 states:
@@ -56,6 +48,19 @@ public class RotaryLiftPID extends StateMachinePID
 		}
 	}
 
+	private static final RotaryLiftPID mInstance = new RotaryLiftPID();
+
+	// private Encoder mEncoder = new Encoder(0, 0, false, EncodingType.k4X);
+
+	public synchronized static RotaryLiftPID getInstance()
+	{
+		return mInstance;
+	}
+
+	// private WPI_TalonSRX mRotaryLiftMotor = new
+	// WPI_TalonSRX(RobotMap.ROTARY_LIFT_PORT);
+	private WPI_TalonSRX mRotaryLiftMotor = new WPI_TalonSRX(6);
+
 	protected RotaryLiftPID()
 	{
 		super("Rotary Lift", 0.01, 0, 0, 0);
@@ -65,29 +70,6 @@ public class RotaryLiftPID extends StateMachinePID
 		setAbsoluteTolerance(10);
 
 		getPIDController().setContinuous();
-	}
-
-	public synchronized static RotaryLiftPID getInstance()
-	{
-		return mInstance;
-	}
-
-	@Override
-	protected double returnPIDInput()
-	{
-		return mRotaryLiftMotor.getSensorCollection().getQuadraturePosition() % 360;
-		// return mEncoder.get() % 360;
-	}
-
-	@Override
-	protected void usePIDOutput(double output)
-	{
-		mRotaryLiftMotor.set(output);
-	}
-
-	public void setSetpoint(RotaryLiftPosition position)
-	{
-		setSetpoint(position.getValue());
 	}
 
 	@Override
@@ -111,10 +93,26 @@ public class RotaryLiftPID extends StateMachinePID
 	@Override
 	public void report()
 	{
-		super.report();
-
 		SmartDashboard.putNumber("Rotary Lift Motor", mRotaryLiftMotor.get());
 		SmartDashboard.putNumber("Rotary Lift Motor", returnPIDInput());
+	}
+
+	@Override
+	protected double returnPIDInput()
+	{
+		return mRotaryLiftMotor.getSensorCollection().getQuadraturePosition() % 360;
+		// return mEncoder.get() % 360;
+	}
+
+	public void setSetpoint(RotaryLiftPosition position)
+	{
+		setSetpoint(position.getValue());
+	}
+
+	@Override
+	protected void usePIDOutput(double output)
+	{
+		mRotaryLiftMotor.set(output);
 	}
 
 }

@@ -23,11 +23,4 @@ public abstract class StateMachine extends Subsystem implements Stateful
 	public void initDefaultCommand()
 	{
 	}
-
-	@Override
-	public void report()
-	{
-		if (getName() != null && getCurrentCommand() != null && getCurrentCommand().getName() != null)
-			SmartDashboard.putString(getName() + " State", getCurrentCommand().getName());
-	}
 }

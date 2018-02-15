@@ -22,38 +22,24 @@ public class RearShooter extends StateMachine
 {
 	private static final RearShooter mInstance = new RearShooter();
 
+	public synchronized static RearShooter getInstance()
+	{
+		return mInstance;
+	}
 	private WPI_TalonSRX mRearRightMotor = new WPI_TalonSRX(RobotMap.REAR_RIGHT_SHOOTER_PORT);
-	private WPI_TalonSRX mRearLeftMotor = new WPI_TalonSRX(RobotMap.ROTARY_LIFT_PORT);
+
+	private WPI_TalonSRX mRearLeftMotor = new WPI_TalonSRX(RobotMap.REAR_LEFT_SHOOTER_PORT);
 
 	protected RearShooter()
 	{
-		mRearRightMotor.setInverted(true);
-	}
-
-	public void idle()
-	{
-		reportState("Idle");
-		mRearRightMotor.set(0);
-		mRearLeftMotor.set(0);
-	}
-
-	public void intake()
-	{
-		reportState("Intake");
-		mRearRightMotor.set(1);
-		mRearLeftMotor.set(1);
+//		mRearRightMotor.setInverted(true); // commented out as a test
 	}
 
 	public void eject()
 	{
-		reportState("Eject");
+//		reportState("Eject");
 		mRearRightMotor.set(-1);
 		mRearLeftMotor.set(-1);
-	}
-
-	public synchronized static RearShooter getInstance()
-	{
-		return mInstance;
 	}
 
 	@Override
@@ -73,11 +59,23 @@ public class RearShooter extends StateMachine
 		return new RearShooterIdle();
 	}
 
+	public void idle()
+	{
+//		reportState("Idle");
+		mRearRightMotor.set(0);
+		mRearLeftMotor.set(0);
+	}
+
+	public void intake()
+	{
+//		reportState("Intake");
+		mRearRightMotor.set(1);
+		mRearLeftMotor.set(1);
+	}
+
 	@Override
 	public void report()
 	{
-		super.report();
-
 		SmartDashboard.putNumber("Rear Right Shooter", mRearRightMotor.get());
 		SmartDashboard.putNumber("Rear Left Shooter", mRearLeftMotor.get());
 	}

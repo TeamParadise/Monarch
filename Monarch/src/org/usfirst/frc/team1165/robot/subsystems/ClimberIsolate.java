@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team1165.robot.subsystems;
 
 import java.util.ArrayList;
@@ -38,6 +37,11 @@ public class ClimberIsolate extends StateMachine
 {
 	private static final ClimberIsolate mInstance = new ClimberIsolate();
 
+	public synchronized static ClimberIsolate getInstance()
+	{
+		return mInstance;
+	}
+
 	private DoubleSolenoid mClimberIsolateSolenoid = new DoubleSolenoid(RobotMap.PCM_1,
 			RobotMap.SOLENOID_CLIMBER_FIRE_PORT, RobotMap.SOLENOID_CLIMBER_ISOLATE_PORT);
 
@@ -45,27 +49,10 @@ public class ClimberIsolate extends StateMachine
 	{
 	}
 
-	public void idle()
-	{
-		reportState("Idle");
-		mClimberIsolateSolenoid.set(Value.kOff);
-	}
-
-	public void isolate()
-	{
-		reportState("Isolate");
-		mClimberIsolateSolenoid.set(Value.kReverse);
-	}
-
 	public void fire()
 	{
 		reportState("Fire");
 		mClimberIsolateSolenoid.set(Value.kForward);
-	}
-
-	public synchronized static ClimberIsolate getInstance()
-	{
-		return mInstance;
 	}
 
 	@Override
@@ -85,11 +72,21 @@ public class ClimberIsolate extends StateMachine
 		return new ClimberIsolateIdle();
 	}
 
+	public void idle()
+	{
+		reportState("Idle");
+		mClimberIsolateSolenoid.set(Value.kOff);
+	}
+
+	public void isolate()
+	{
+		reportState("Isolate");
+		mClimberIsolateSolenoid.set(Value.kReverse);
+	}
+
 	@Override
 	public void report()
 	{
-		super.report();
-
 		SmartDashboard.putString("Climber Isolate", mClimberIsolateSolenoid.get().toString());
 	}
 }

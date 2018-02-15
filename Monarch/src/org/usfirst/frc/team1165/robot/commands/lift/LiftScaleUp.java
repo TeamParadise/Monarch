@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1165.robot.commandgroups.lift;
+package org.usfirst.frc.team1165.robot.commands.lift;
 
 import org.usfirst.frc.team1165.robot.commands.linear_lift.LinearLiftScaleUp;
 import org.usfirst.frc.team1165.robot.commands.rotary_lift.RotaryLiftScaleUp;

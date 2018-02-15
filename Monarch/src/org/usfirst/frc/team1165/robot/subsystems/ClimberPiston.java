@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team1165.robot.subsystems;
 
 import java.util.ArrayList;
@@ -37,6 +36,11 @@ public class ClimberPiston extends StateMachine
 {
 	private static final ClimberPiston mInstance = new ClimberPiston();
 
+	public synchronized static ClimberPiston getInstance()
+	{
+		return mInstance;
+	}
+
 	private DoubleSolenoid mClimberSolenoid = new DoubleSolenoid(RobotMap.PCM_1, RobotMap.SOLENOID_CLIMBER_EXTEND_PORT,
 			RobotMap.SOLENOID_CLIMBER_RETRACT_PORT);
 
@@ -44,27 +48,10 @@ public class ClimberPiston extends StateMachine
 	{
 	}
 
-	public void idle()
-	{
-		reportState("Idle");
-		mClimberSolenoid.set(Value.kOff);
-	}
-
 	public void extend()
 	{
 		reportState("Extend");
 		mClimberSolenoid.set(Value.kForward);
-	}
-
-	public void retract()
-	{
-		reportState("Retract");
-		mClimberSolenoid.set(Value.kReverse);
-	}
-
-	public synchronized static ClimberPiston getInstance()
-	{
-		return mInstance;
 	}
 
 	@Override
@@ -84,11 +71,21 @@ public class ClimberPiston extends StateMachine
 		return new ClimberPistonIdle();
 	}
 
+	public void idle()
+	{
+		reportState("Idle");
+		mClimberSolenoid.set(Value.kOff);
+	}
+
 	@Override
 	public void report()
 	{
-		super.report();
-
 		SmartDashboard.putString("Climber Piston", mClimberSolenoid.get().toString());
+	}
+
+	public void retract()
+	{
+		reportState("Retract");
+		mClimberSolenoid.set(Value.kReverse);
 	}
 }

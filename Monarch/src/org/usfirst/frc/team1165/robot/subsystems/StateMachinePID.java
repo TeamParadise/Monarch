@@ -3,7 +3,6 @@ package org.usfirst.frc.team1165.robot.subsystems;
 import org.usfirst.frc.team1165.util.Stateful;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * 
@@ -21,13 +20,6 @@ public abstract class StateMachinePID extends PIDSubsystem implements Stateful
 	@Override
 	public void initDefaultCommand()
 	{
-	}
-
-	@Override
-	public void report()
-	{
-		if (getName() != null && getCurrentCommand() != null && getCurrentCommand().getName() != null)
-			SmartDashboard.putString(getName() + " State", getCurrentCommand().getName());
 	}
 
 }
