@@ -1,26 +1,29 @@
 
-package org.usfirst.frc.team1165.robot.commands.climber_isolate;
+package org.usfirst.frc.team1165.robot.commands.rotary_lift;
 
-import org.usfirst.frc.team1165.robot.subsystems.ClimberIsolate;
+import static org.usfirst.frc.team1165.robot.subsystems.RotaryLiftPID.RotaryLiftPosition.IDLE;
+
+import org.usfirst.frc.team1165.robot.subsystems.RotaryLiftPID;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ClimberIsolateIsolate extends Command
+public class RotaryLiftIdle extends Command
 {
-	private ClimberIsolate mClimberIsolate = ClimberIsolate.getInstance();
+	private RotaryLiftPID mRotaryLiftPID = RotaryLiftPID.getInstance();
 	
-	public ClimberIsolateIsolate()
+	public RotaryLiftIdle()
 	{
-		requires(mClimberIsolate);
+		requires(mRotaryLiftPID);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize()
 	{
-		mClimberIsolate.idle();
+		mRotaryLiftPID.setSetpoint(IDLE);
+		mRotaryLiftPID.enable();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

@@ -1,9 +1,9 @@
 
 package org.usfirst.frc.team1165.robot.commands.claw;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team1165.robot.subsystems.Claw;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *

@@ -1,9 +1,9 @@
 
 package org.usfirst.frc.team1165.robot.commands.rear_shooter;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team1165.robot.subsystems.RearShooter;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *

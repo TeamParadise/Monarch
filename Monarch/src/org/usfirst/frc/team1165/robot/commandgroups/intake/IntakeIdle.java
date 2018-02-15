@@ -13,7 +13,7 @@ public class IntakeIdle extends CommandGroup
 {
 	public IntakeIdle()
 	{
-		addParallel(new IntakeIdle());
+		addParallel(new ClawIdle());
 		addParallel(new FrontShooterIdle());
 		addParallel(new RearShooterIdle());
 	}

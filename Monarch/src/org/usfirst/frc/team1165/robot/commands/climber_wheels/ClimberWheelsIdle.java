@@ -1,9 +1,9 @@
 
 package org.usfirst.frc.team1165.robot.commands.climber_wheels;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team1165.robot.subsystems.ClimberWheels;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *

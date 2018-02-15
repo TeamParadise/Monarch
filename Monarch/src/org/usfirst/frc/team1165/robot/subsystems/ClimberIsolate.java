@@ -75,7 +75,7 @@ public class ClimberIsolate extends StateMachine
 
 		states.add(new ClimberIsolateIsolate());
 		states.add(new ClimberIsolateFire());
-		
+
 		return states;
 	}
 

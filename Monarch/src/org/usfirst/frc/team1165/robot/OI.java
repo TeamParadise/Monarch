@@ -8,7 +8,6 @@ import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeStageIntake;
 import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeStore;
 import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeTwistLeft;
 import org.usfirst.frc.team1165.robot.commandgroups.intake.IntakeTwistRight;
-import org.usfirst.frc.team1165.robot.commands.claw.ClawIdle;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;

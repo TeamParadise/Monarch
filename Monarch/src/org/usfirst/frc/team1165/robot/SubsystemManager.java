@@ -2,13 +2,7 @@ package org.usfirst.frc.team1165.robot;
 
 import java.util.ArrayList;
 
-import org.usfirst.frc.team1165.robot.subsystems.Claw;
-import org.usfirst.frc.team1165.robot.subsystems.ClimberIsolate;
 import org.usfirst.frc.team1165.robot.subsystems.ClimberPiston;
-import org.usfirst.frc.team1165.robot.subsystems.ClimberWheels;
-import org.usfirst.frc.team1165.robot.subsystems.FrontShooter;
-import org.usfirst.frc.team1165.robot.subsystems.RearShooter;
-import org.usfirst.frc.team1165.robot.subsystems.superstructures.Intake;
 import org.usfirst.frc.team1165.util.Stateful;
 
 import edu.wpi.first.wpilibj.command.Command;

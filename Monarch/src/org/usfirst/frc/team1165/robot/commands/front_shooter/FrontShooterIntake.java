@@ -1,9 +1,9 @@
 
 package org.usfirst.frc.team1165.robot.commands.front_shooter;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team1165.robot.subsystems.FrontShooter;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
