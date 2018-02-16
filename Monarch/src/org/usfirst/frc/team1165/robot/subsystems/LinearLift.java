@@ -12,8 +12,6 @@ import org.usfirst.frc.team1165.robot.commands.linear_lift.LinearLiftSwitch;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -22,7 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author Kesav Kadalazhi
  *
  */
-public class LinearLiftPID extends StateMachinePID
+public class LinearLift extends StateMachinePID
 {
 	public enum LinearLiftPosition
 	{
@@ -41,27 +39,34 @@ public class LinearLiftPID extends StateMachinePID
 		}
 	}
 
-	private static final LinearLiftPID mInstance = new LinearLiftPID();
+	private static final LinearLift mInstance = new LinearLift();
 
-	public synchronized static LinearLiftPID getInstance()
+	private WPI_TalonSRX mLinearLiftMotor = new WPI_TalonSRX(RobotMap.LINEAR_LIFT_PORT);
+
+	protected LinearLift()
+	{
+		super("Linear Lift", 0.1, 0, 0.01, 0);
+
+		resetInputRange(LinearLiftPosition.INTAKE, LinearLiftPosition.SCALE_UP);
+		setOutputRange(-0.2, 0.2);
+		setAbsoluteTolerance(10);
+
+		getPIDController().setContinuous(false);
+	}
+
+	public synchronized static LinearLift getInstance()
 	{
 		return mInstance;
 	}
 
-	private WPI_TalonSRX mLinearLiftMotor = new WPI_TalonSRX(RobotMap.LINEAR_LIFT_PORT);
-
-	private Encoder mEncoder = new Encoder(0, 0, false, EncodingType.k4X);
-
-	protected LinearLiftPID()
+	public void resetInputRange(LinearLiftPosition down, LinearLiftPosition up)
 	{
-		super("Linear Lift", 0.01, 0, 0, 0);
+		setInputRange(down.getValue() - 100, up.getValue() + 100);
+	}
 
-		resetInputRange(LinearLiftPosition.INTAKE, LinearLiftPosition.SCALE_UP); // placeholder
-																					// value
-		setOutputRange(-0.25, 0.25);
-		setAbsoluteTolerance(10);
-
-		getPIDController().setContinuous(false);
+	public double getLiftPosition()
+	{
+		return mLinearLiftMotor.getSensorCollection().getQuadraturePosition();
 	}
 
 	@Override
@@ -84,27 +89,16 @@ public class LinearLiftPID extends StateMachinePID
 		return new LinearLiftIdle();
 	}
 
-	public double getPosition()
-	{
-		return mEncoder.get();
-	}
-
-	@Override
-	public void report()
-	{
-		SmartDashboard.putNumber("Linear Lift Motor", mLinearLiftMotor.get());
-		SmartDashboard.putNumber("Linear Lift Motor Position", getPosition());
-	}
-
-	public void resetInputRange(LinearLiftPosition down, LinearLiftPosition up)
-	{
-		setInputRange(down.getValue() - 100, up.getValue() + 100);
-	}
-
 	@Override
 	protected double returnPIDInput()
 	{
-		return getPosition();
+		return getLiftPosition();
+	}
+
+	@Override
+	protected void usePIDOutput(double output)
+	{
+		mLinearLiftMotor.set(output);
 	}
 
 	public void setSetpoint(LinearLiftPosition position)
@@ -113,9 +107,13 @@ public class LinearLiftPID extends StateMachinePID
 	}
 
 	@Override
-	protected void usePIDOutput(double output)
+	public void report()
 	{
-		mLinearLiftMotor.set(output);
+		SmartDashboard.putNumber("Linear Lift Motor", mLinearLiftMotor.get());
+		SmartDashboard.putNumber("Linear Lift Motor Position", getLiftPosition());
+
+		SmartDashboard.putNumber("Linear Lift Target", getSetpoint());
+		SmartDashboard.putBoolean("Linear Lift On Target", onTarget());
 	}
 
 }

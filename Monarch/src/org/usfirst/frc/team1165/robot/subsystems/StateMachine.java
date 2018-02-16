@@ -3,7 +3,6 @@ package org.usfirst.frc.team1165.robot.subsystems;
 import org.usfirst.frc.team1165.util.Stateful;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * <p>

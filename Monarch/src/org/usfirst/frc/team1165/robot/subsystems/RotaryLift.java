@@ -6,6 +6,7 @@ import java.util.List;
 import org.usfirst.frc.team1165.robot.commands.rotary_lift.RotaryLiftDown;
 import org.usfirst.frc.team1165.robot.commands.rotary_lift.RotaryLiftIdle;
 import org.usfirst.frc.team1165.robot.commands.rotary_lift.RotaryLiftScaleDown;
+import org.usfirst.frc.team1165.robot.commands.rotary_lift.RotaryLiftScaleUp;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -17,8 +18,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author Kesav Kadalazhi
  *
  */
-public class RotaryLiftPID extends StateMachinePID
+public class RotaryLift extends StateMachinePID
 {
+	private static final RotaryLift mInstance = new RotaryLift();
+
+	// private WPI_TalonSRX mRotaryLiftMotor = new WPI_TalonSRX(RobotMap.ROTARY_LIFT_PORT);
+	private WPI_TalonSRX mRotaryLiftMotor = new WPI_TalonSRX(6);
+
+//	private AnalogPotentiometer mPotentiometer = new AnalogPotentiometer(0, 360, 0);
+	
+	private double mOutput;
+	
 	/**
 	 * <p>
 	 * The Rotary Lift has 4 states:
@@ -48,26 +58,18 @@ public class RotaryLiftPID extends StateMachinePID
 		}
 	}
 
-	private static final RotaryLiftPID mInstance = new RotaryLiftPID();
-
-	// private Encoder mEncoder = new Encoder(0, 0, false, EncodingType.k4X);
-
-	public synchronized static RotaryLiftPID getInstance()
+	public synchronized static RotaryLift getInstance()
 	{
 		return mInstance;
 	}
 
-	// private WPI_TalonSRX mRotaryLiftMotor = new
-	// WPI_TalonSRX(RobotMap.ROTARY_LIFT_PORT);
-	private WPI_TalonSRX mRotaryLiftMotor = new WPI_TalonSRX(6);
-
-	protected RotaryLiftPID()
+	protected RotaryLift()
 	{
-		super("Rotary Lift", 0.01, 0, 0, 0);
+		super("Rotary Lift", 0.05, 0, 0, 0.01);
 
 		setInputRange(0, 360);
-		setOutputRange(-0.25, 0.25);
-		setAbsoluteTolerance(10);
+		setOutputRange(-0.1, 0.1);
+		setAbsoluteTolerance(5);
 
 		getPIDController().setContinuous();
 	}
@@ -80,6 +82,7 @@ public class RotaryLiftPID extends StateMachinePID
 		commands.add(new RotaryLiftDown());
 		commands.add(new RotaryLiftIdle());
 		commands.add(new RotaryLiftScaleDown());
+		commands.add(new RotaryLiftScaleUp());
 
 		return commands;
 	}
@@ -89,19 +92,16 @@ public class RotaryLiftPID extends StateMachinePID
 	{
 		return new RotaryLiftIdle();
 	}
-
-	@Override
-	public void report()
-	{
-		SmartDashboard.putNumber("Rotary Lift Motor", mRotaryLiftMotor.get());
-		SmartDashboard.putNumber("Rotary Lift Motor", returnPIDInput());
+	
+	public double getLiftPosition() {
+		return mRotaryLiftMotor.getSensorCollection().getQuadraturePosition() % 360;
+//		return mPotentiometer.get();
 	}
 
 	@Override
 	protected double returnPIDInput()
 	{
-		return mRotaryLiftMotor.getSensorCollection().getQuadraturePosition() % 360;
-		// return mEncoder.get() % 360;
+		return getLiftPosition();
 	}
 
 	public void setSetpoint(RotaryLiftPosition position)
@@ -109,10 +109,27 @@ public class RotaryLiftPID extends StateMachinePID
 		setSetpoint(position.getValue());
 	}
 
+	public void stop() {
+		mRotaryLiftMotor.set(0);
+	}
+	
 	@Override
 	protected void usePIDOutput(double output)
 	{
+		mOutput = output;
 		mRotaryLiftMotor.set(output);
+	}
+
+	@Override
+	public void report()
+	{
+		SmartDashboard.putNumber("Rotary Lift Motor", mRotaryLiftMotor.get());
+		SmartDashboard.putNumber("Rotary Lift Position", getLiftPosition());
+
+		SmartDashboard.putNumber("Linear Lift Target", getSetpoint());
+		SmartDashboard.putBoolean("Linear Lift On Target", onTarget());
+		
+		SmartDashboard.putNumber("Linear Lift Output", mOutput);
 	}
 
 }

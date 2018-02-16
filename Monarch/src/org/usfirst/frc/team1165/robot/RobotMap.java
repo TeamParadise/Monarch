@@ -22,8 +22,8 @@ public class RobotMap
 	public static final int REAR_RIGHT_SHOOTER_PORT = 4;
 	public static final int REAR_LEFT_SHOOTER_PORT = 3;
 
-	public static final int LINEAR_LIFT_PORT = 7;
-	public static final int ROTARY_LIFT_PORT = 8;
+	public static final int LINEAR_LIFT_PORT = 6;
+	public static final int ROTARY_LIFT_PORT = 6;
 
 	public static final int SERVO_PORT = 0;
 

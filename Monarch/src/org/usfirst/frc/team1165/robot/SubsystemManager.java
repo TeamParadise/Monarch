@@ -2,7 +2,7 @@ package org.usfirst.frc.team1165.robot;
 
 import java.util.ArrayList;
 
-import org.usfirst.frc.team1165.robot.subsystems.RearShooter;
+import org.usfirst.frc.team1165.robot.subsystems.RotaryLift;
 import org.usfirst.frc.team1165.util.Stateful;
 
 import edu.wpi.first.wpilibj.Sendable;
@@ -20,11 +20,11 @@ public class SubsystemManager
 	public SubsystemManager()
 	{
 		// add(FrontShooter.getInstance());
-		 add(RearShooter.getInstance());
-		// add(Claw.getInstance());
+//		 add(RearShooter.getInstance());
+//		 add(Claw.getInstance());
 
-		// add(LinearLiftPID.getInstance());
-		// add(RotaryLiftPID.getInstance());
+//		 add(LinearLift.getInstance());
+		 add(RotaryLift.getInstance());
 		// add(Lift.getInstance());
 
 //		add(ClimberPiston.getInstance());
