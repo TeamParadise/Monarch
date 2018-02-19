@@ -1,18 +1,11 @@
 package org.usfirst.frc.team1165.robot.subsystems;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.usfirst.frc.team1165.robot.RobotMap;
-import org.usfirst.frc.team1165.robot.commands.rear_shooter.RearShooterEject;
-import org.usfirst.frc.team1165.robot.commands.rear_shooter.RearShooterIdle;
-import org.usfirst.frc.team1165.robot.commands.rear_shooter.RearShooterIntake;
-import org.usfirst.frc.team1165.util.MotorPower;
 import org.usfirst.frc.team1165.util.StateMachine;
+import org.usfirst.frc.team1165.util.states.ShooterState;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -37,39 +30,10 @@ public class RearShooter extends StateMachine
 		return mInstance;
 	}
 
-	public void set(MotorPower power)
+	public void set(ShooterState state)
 	{
-		set(power, power);
-	}
-
-	public void set(MotorPower rightPower, MotorPower leftPower)
-	{
-		mRearRightMotor.set(rightPower.get());
-		mRearLeftMotor.set(leftPower.get());
-	}
-
-	public void idle()
-	{
-		mRearRightMotor.set(0);
-		mRearLeftMotor.set(0);
-	}
-
-	public void intake()
-	{
-		mRearRightMotor.set(1);
-		mRearLeftMotor.set(1);
-	}
-
-	public void eject()
-	{
-		mRearRightMotor.set(-1);
-		mRearLeftMotor.set(-1);
-	}
-
-	@Override
-	public List<Command> getCommands()
-	{
-		return Arrays.asList(new RearShooterIdle(), new RearShooterIntake(), new RearShooterEject());
+		mRearRightMotor.set(state.getRight());
+		mRearLeftMotor.set(state.getLeft());
 	}
 
 	@Override

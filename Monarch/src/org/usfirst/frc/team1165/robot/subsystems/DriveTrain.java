@@ -63,11 +63,11 @@ public class DriveTrain extends StateMachine
 	 * Arcade drive method for differential drive platform. The calculated
 	 * values will be squared to decrease sensitivity at low speeds.
 	 *
-	 * @param xSpeed
-	 *            The robot's speed along the X axis [-1.0..1.0]. Forward is
+	 * @param speed
+	 *            The robot's speed along the Y axis [-1.0..1.0]. Forward is
 	 *            positive.
-	 * @param zRotation
-	 *            The robot's rotation rate around the Z axis [-1.0..1.0].
+	 * @param twist
+	 *            The robot's twist around the Z axis [-1.0..1.0].
 	 *            Clockwise is positive.
 	 */
 	public void arcadeDrive(double speed, double twist)
@@ -80,10 +80,10 @@ public class DriveTrain extends StateMachine
 	 * will be squared to decrease sensitivity at low speeds.
 	 *
 	 * @param leftSpeed
-	 *            The robot's left side speed along the X axis [-1.0..1.0].
+	 *            The robot's left side speed along the Y axis [-1.0..1.0].
 	 *            Forward is positive.
 	 * @param rightSpeed
-	 *            The robot's right side speed along the X axis [-1.0..1.0].
+	 *            The robot's right side speed along the Y axis [-1.0..1.0].
 	 *            Forward is positive.
 	 */
 	public void tankDrive(double leftSpeed, double rightSpeed)

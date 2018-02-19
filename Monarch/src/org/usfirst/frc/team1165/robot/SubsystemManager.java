@@ -34,7 +34,7 @@ public class SubsystemManager
 	public void putCommands()
 	{
 		mSubsystems.forEach((subsystem) -> {
-			subsystem.getCommands().forEach(SmartDashboard::putData);
+//			subsystem.getCommands().forEach(SmartDashboard::putData);
 		});
 	}
 

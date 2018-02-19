@@ -1,12 +1,12 @@
-package org.usfirst.frc.team1165.util;
+package org.usfirst.frc.team1165.util.states;
 
-public enum LinearLiftPosition
+public enum LinearLiftState
 {
 	IDLE(0), INTAKE(0), SWITCH(100), SCALE_DOWN(200), SCALE_UP(300);
 
 	private int value;
 
-	LinearLiftPosition(int value)
+	LinearLiftState(int value)
 	{
 		this.value = value;
 	}

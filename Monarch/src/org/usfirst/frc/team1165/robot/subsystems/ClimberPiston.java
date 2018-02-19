@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1165.robot.subsystems;
 
-import java.util.Arrays;
+import static java.util.Arrays.asList;
 import java.util.List;
 
 import org.usfirst.frc.team1165.robot.RobotMap;
@@ -49,9 +49,9 @@ public class ClimberPiston extends StateMachine
 		return mInstance;
 	}
 
-	public void set(Value position)
+	public void set(Value state)
 	{
-		mClimberSolenoid.set(position);
+		mClimberSolenoid.set(state);
 	}
 
 	public void idle()
@@ -67,12 +67,6 @@ public class ClimberPiston extends StateMachine
 	public void retract()
 	{
 		mClimberSolenoid.set(Value.kReverse);
-	}
-
-	@Override
-	public List<Command> getCommands()
-	{
-		return Arrays.asList(new ClimberPistonIdle(), new ClimberPistonExtend(), new ClimberPistonRetract());
 	}
 
 	@Override

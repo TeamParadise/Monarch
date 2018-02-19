@@ -49,15 +49,9 @@ public class Claw extends StateMachine
 		return mInstance;
 	}
 	
-	public  void set(Value position)
+	public void set(Value state)
 	{
-		mClawSolenoid.set(position);
-	}
-
-	@Override
-	public List<Command> getCommands()
-	{
-		return Arrays.asList(new ClawIdle(), new ClawOpen(), new ClawClose());
+		mClawSolenoid.set(state);
 	}
 
 	@Override

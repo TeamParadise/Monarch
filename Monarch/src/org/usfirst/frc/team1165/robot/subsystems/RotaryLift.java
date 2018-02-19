@@ -10,8 +10,8 @@ import org.usfirst.frc.team1165.robot.commands.rotary_lift.RotaryLiftDown;
 import org.usfirst.frc.team1165.robot.commands.rotary_lift.RotaryLiftIdle;
 import org.usfirst.frc.team1165.robot.commands.rotary_lift.RotaryLiftScaleDown;
 import org.usfirst.frc.team1165.robot.commands.rotary_lift.RotaryLiftScaleUp;
-import org.usfirst.frc.team1165.util.RotaryLiftPosition;
 import org.usfirst.frc.team1165.util.StateMachinePID;
+import org.usfirst.frc.team1165.util.states.RotaryLiftState;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -50,9 +50,24 @@ public class RotaryLift extends StateMachinePID
 		return mInstance;
 	}
 
-	public void set(RotaryLiftPosition position)
+	/**
+	 * <p>
+	 * Sets the state of the Rotary Lift. States:
+	 * </p>
+	 * <ol>
+	 * <li>Idle is 0 in</li>
+	 * <li>Intake is 0 in</li>
+	 * <li>Switch is 100 in</li>
+	 * <li>Scale Down is 200 in</li>
+	 * <li>Scale Up is 300 in</li>
+	 * </ul>
+	 * <br>
+	 * 
+	 * @param state the desired state of the Linear Lift
+	 */
+	public void set(RotaryLiftState state)
 	{
-		setSetpoint(position.getValue());
+		setSetpoint(state.getValue());
 	}
 
 	public void stop()
@@ -63,13 +78,6 @@ public class RotaryLift extends StateMachinePID
 	public double getLiftPosition()
 	{
 		return mPotentiometer.get();
-	}
-
-	@Override
-	public List<Command> getCommands()
-	{
-		return Arrays.asList(new RotaryLiftIdle(), new RotaryLiftDown(), new RotaryLiftScaleDown(),
-				new RotaryLiftScaleUp());
 	}
 
 	@Override

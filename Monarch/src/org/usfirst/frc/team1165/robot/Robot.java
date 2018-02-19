@@ -1,10 +1,28 @@
 
 package org.usfirst.frc.team1165.robot;
 
+import org.usfirst.frc.team1165.robot.commands.ClawCommand;
+import org.usfirst.frc.team1165.robot.commands.ClimberPistonCommand;
+import org.usfirst.frc.team1165.robot.commands.ClimberWheelsCommand;
+import org.usfirst.frc.team1165.robot.commands.ClimberWingsCommand;
+import org.usfirst.frc.team1165.robot.commands.FrontShooterCommand;
+import org.usfirst.frc.team1165.robot.commands.LinearLiftCommand;
+import org.usfirst.frc.team1165.robot.commands.RearShooterCommand;
+import org.usfirst.frc.team1165.robot.commands.RotaryLiftCommand;
+import org.usfirst.frc.team1165.robot.commands.drive.DriveWithJoystick;
+import org.usfirst.frc.team1165.robot.subsystems.Claw;
+import org.usfirst.frc.team1165.robot.subsystems.ClimberPiston;
+import org.usfirst.frc.team1165.robot.subsystems.ClimberWheels;
+import org.usfirst.frc.team1165.robot.subsystems.ClimberWings;
 import org.usfirst.frc.team1165.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team1165.robot.subsystems.FrontShooter;
+import org.usfirst.frc.team1165.robot.subsystems.LinearLift;
+import org.usfirst.frc.team1165.robot.subsystems.RearShooter;
+import org.usfirst.frc.team1165.robot.subsystems.RotaryLift;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -17,6 +35,8 @@ public class Robot extends IterativeRobot
 {
 	private static final SubsystemManager mManager = SubsystemManager.getInstance();
 
+//	private static final Manager manager = Manager.getInstance();
+	
 	// Command autonomousCommand;
 
 	/**
@@ -26,7 +46,18 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
-
+		
+//		manager.add(DriveTrain.getInstance(), new DriveWithJoystick());
+//		manager.add(Claw.getInstance(), new ClawCommand(null));
+//		manager.add(ClimberPiston.getInstance(), new ClimberPistonCommand(null));
+//		manager.add(ClimberWheels.getInstance(), new ClimberWheelsCommand(false));
+//		manager.add(ClimberWings.getInstance(), new ClimberWingsCommand(false));
+//		manager.add(FrontShooter.getInstance(), new FrontShooterCommand(null));
+//		manager.add(LinearLift.getInstance(), new LinearLiftCommand(null));
+//		manager.add(RearShooter.getInstance(), new RearShooterCommand(null));
+//		manager.add(RotaryLift.getInstance(), new RotaryLiftCommand(null));
+		
+				
 		mManager.add(DriveTrain.getInstance());
 		
 //		mManager.add(FrontShooter.getInstance());

@@ -1,20 +1,22 @@
-package org.usfirst.frc.team1165.robot.commands.intake;
-
-import org.usfirst.frc.team1165.robot.commands.claw.ClawIdle;
-import org.usfirst.frc.team1165.robot.commands.front_shooter.FrontShooterIdle;
-import org.usfirst.frc.team1165.robot.commands.rear_shooter.RearShooterIdle;
-
-import edu.wpi.first.wpilibj.command.CommandGroup;
-
-/**
- *
- */
-public class IntakeIdle extends CommandGroup
-{
-	public IntakeIdle()
-	{
-		addParallel(new ClawIdle());
-		addParallel(new FrontShooterIdle());
-		addParallel(new RearShooterIdle());
-	}
-}
+//package org.usfirst.frc.team1165.robot.commands.intake;
+//
+//import org.usfirst.frc.team1165.robot.commands.ClawCommand;
+//import org.usfirst.frc.team1165.robot.commands.FrontShooterCommand;
+//import org.usfirst.frc.team1165.robot.commands.RearShooterCommand;
+//import org.usfirst.frc.team1165.util.states.ShooterState;
+//
+//import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+//import edu.wpi.first.wpilibj.command.CommandGroup;
+//
+///**
+// *
+// */
+//public class IntakeIdle extends CommandGroup
+//{
+//	public IntakeIdle()
+//	{
+//		addParallel(new ClawCommand(Value.kOff));
+//		addParallel(new FrontShooterCommand(ShooterState.IDLE));
+//		addParallel(new RearShooterCommand(ShooterState.IDLE));
+//	}
+//}

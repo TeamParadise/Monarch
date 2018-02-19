@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * <p>
  * The ClimberWheels consists of two stops at the back of the robot that are let
- * out
+ * out.
  * </p>
  * 
  * <p>
@@ -32,44 +32,29 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author Kesav Kadalazhi
  *
  */
-public class ClimberWheels extends StateMachine
+public class ClimberWings extends StateMachine
 {
-	private static final ClimberWheels mInstance = new ClimberWheels();
+	private static final ClimberWings mInstance = new ClimberWings();
 
-	private Solenoid mClimberWheelsSolenoid = new Solenoid(RobotMap.PCM_1, RobotMap.SOLENOID_CLIMBER_WHEELS_PORT);
+	private Solenoid mClimberWingsSolenoid = new Solenoid(RobotMap.PCM_1, RobotMap.SOLENOID_CLIMBER_WHEELS_PORT);
 
-	protected ClimberWheels()
+	protected ClimberWings()
 	{
 	}
 
-	public synchronized static ClimberWheels getInstance()
+	public synchronized static ClimberWings getInstance()
 	{
 		return mInstance;
 	}
 
 	public void set(boolean position)
 	{
-		mClimberWheelsSolenoid.set(position);
+		mClimberWingsSolenoid.set(position);
 	}
-
-	public void idle()
-	{
-		mClimberWheelsSolenoid.set(false);
-	}
-
-	public void disengage()
-	{
-		mClimberWheelsSolenoid.set(false);
-	}
-
-	public void engage()
-	{
-		mClimberWheelsSolenoid.set(true);
-	}
-
+	
 	@Override
 	public void report()
 	{
-		SmartDashboard.putBoolean("Climber Wheels Piston", mClimberWheelsSolenoid.get());
+		SmartDashboard.putBoolean("Climber Wings Piston", mClimberWingsSolenoid.get());
 	}
 }

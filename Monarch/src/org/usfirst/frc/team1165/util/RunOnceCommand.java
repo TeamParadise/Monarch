@@ -1,5 +1,5 @@
 
-package org.usfirst.frc.team1165.robot.commands;
+package org.usfirst.frc.team1165.util;
 
 /**
  * Subclasses need to define {@link #initialize} and {@link #end}.

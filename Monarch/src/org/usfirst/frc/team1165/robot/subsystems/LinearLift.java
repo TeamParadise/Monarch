@@ -2,20 +2,11 @@ package org.usfirst.frc.team1165.robot.subsystems;
 
 import static org.usfirst.frc.team1165.robot.RobotMap.LINEAR_LIFT_PORT;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.usfirst.frc.team1165.robot.commands.linear_lift.LinearLiftIdle;
-import org.usfirst.frc.team1165.robot.commands.linear_lift.LinearLiftIntake;
-import org.usfirst.frc.team1165.robot.commands.linear_lift.LinearLiftScaleDown;
-import org.usfirst.frc.team1165.robot.commands.linear_lift.LinearLiftScaleUp;
-import org.usfirst.frc.team1165.robot.commands.linear_lift.LinearLiftSwitch;
-import org.usfirst.frc.team1165.util.LinearLiftPosition;
 import org.usfirst.frc.team1165.util.StateMachinePID;
+import org.usfirst.frc.team1165.util.states.LinearLiftState;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -36,9 +27,6 @@ public class LinearLift extends StateMachinePID
 		setInputRange(-10, 65);
 		setOutputRange(-0.3, 0.3);
 		setAbsoluteTolerance(10);
-
-		// mLinearLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,
-		// 0, 0);
 	}
 
 	public synchronized static LinearLift getInstance()
@@ -46,9 +34,9 @@ public class LinearLift extends StateMachinePID
 		return mInstance;
 	}
 
-	public void set(LinearLiftPosition position)
+	public void set(LinearLiftState state)
 	{
-		setSetpoint(position.get());
+		setSetpoint(state.get());
 	}
 
 	/**
@@ -68,13 +56,6 @@ public class LinearLift extends StateMachinePID
 		 * in = (ticks * pi * 1.751 * gear_ratio) / 12 ticks)
 		 */
 		// return (mLinearLiftMotor.getSensorCollection().getQuadraturePosition() * Math.PI * 1.751 * 4) / 12;
-	}
-
-	@Override
-	public List<Command> getCommands()
-	{
-		return Arrays.asList(new LinearLiftIdle(), new LinearLiftIntake(), new LinearLiftIdle(), new LinearLiftSwitch(),
-				new LinearLiftScaleDown(), new LinearLiftScaleUp());
 	}
 
 	@Override

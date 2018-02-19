@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1165.util;
+package org.usfirst.frc.team1165.util.states;
 
 /**
  * <p>
@@ -12,13 +12,13 @@ package org.usfirst.frc.team1165.util;
  * <li>Scale Up: 45 from the ground</li>
  * </ol>
  */
-public enum RotaryLiftPosition
+public enum RotaryLiftState
 {
 	IDLE(0), DOWN(0), SCALE_DOWN(22.5), SCALE_UP(45);
 
 	private double value;
 
-	RotaryLiftPosition(double value)
+	RotaryLiftState(double value)
 	{
 		this.value = value;
 	}

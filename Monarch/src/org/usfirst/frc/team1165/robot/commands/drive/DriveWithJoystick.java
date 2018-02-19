@@ -18,27 +18,9 @@ public class DriveWithJoystick extends Command
 	}
 
 	@Override
-	protected void initialize()
-	{
-	}
-
-	@Override
 	protected void execute()
 	{
 		mDriveTrain.arcadeDrive(OperatorInterface.getY(), OperatorInterface.getTwist());
-//		mDriveTrain.tankDrive(OperatorInterface.getY(), OperatorInterface.getTwist());
-
-//		mDriveTrain.arcadeDrive(Robot.mOI.getDampedX(), Robot.mOI.getDampedTwist()); // for switch
-//		mDriveTrain.tankDrive(Robot.mOI.getLeftY(), Robot.mOI.getLeftY());
-
-//		double twist = 0;
-//
-//		if(Robot.mOI.getButtonX())
-//			twist = 0.5;
-//		if(Robot.mOI.getButtonB())
-//			twist = -0.5;
-//
-//		mDriveTrain.arcadeDrive(Robot.mOI.getLeftY(), twist);
 	}
 
 	@Override
@@ -53,9 +35,4 @@ public class DriveWithJoystick extends Command
 		mDriveTrain.tankDrive(0, 0);
 	}
 
-	@Override
-	protected void interrupted()
-	{
-		end();
-	}
 }
