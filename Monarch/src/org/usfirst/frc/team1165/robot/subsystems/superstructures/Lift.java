@@ -3,11 +3,11 @@ package org.usfirst.frc.team1165.robot.subsystems.superstructures;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.usfirst.frc.team1165.robot.commands.linear_lift.LinearLiftIdle;
-import org.usfirst.frc.team1165.robot.commands.linear_lift.LinearLiftIntake;
-import org.usfirst.frc.team1165.robot.commands.linear_lift.LinearLiftScaleDown;
-import org.usfirst.frc.team1165.robot.commands.linear_lift.LinearLiftScaleUp;
-import org.usfirst.frc.team1165.robot.commands.linear_lift.LinearLiftSwitch;
+import org.usfirst.frc.team1165.robot.commands.lift.LiftIdle;
+import org.usfirst.frc.team1165.robot.commands.lift.LiftIntake;
+import org.usfirst.frc.team1165.robot.commands.lift.LiftScaleDown;
+import org.usfirst.frc.team1165.robot.commands.lift.LiftScaleUp;
+import org.usfirst.frc.team1165.robot.commands.lift.LiftSwitch;
 import org.usfirst.frc.team1165.util.Stateful;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -35,18 +35,13 @@ public class Lift implements Stateful
 	{
 		List<Command> commands = new ArrayList<Command>();
 
-		commands.add(new LinearLiftIntake());
-		commands.add(new LinearLiftScaleDown());
-		commands.add(new LinearLiftScaleUp());
-		commands.add(new LinearLiftSwitch());
+		commands.add(new LiftIdle());
+		commands.add(new LiftIntake());
+		commands.add(new LiftScaleDown());
+		commands.add(new LiftScaleUp());
+		commands.add(new LiftSwitch());
 
 		return commands;
-	}
-
-	@Override
-	public Command getIdleCommand()
-	{
-		return new LinearLiftIdle();
 	}
 
 	@Override

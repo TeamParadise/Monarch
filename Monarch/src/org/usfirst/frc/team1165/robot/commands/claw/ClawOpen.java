@@ -1,14 +1,15 @@
 
 package org.usfirst.frc.team1165.robot.commands.claw;
 
-import org.usfirst.frc.team1165.robot.subsystems.Claw;
+import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.kReverse;
 
-import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team1165.robot.commands.StateCommand;
+import org.usfirst.frc.team1165.robot.subsystems.Claw;
 
 /**
  *
  */
-public class ClawOpen extends Command
+public class ClawOpen extends StateCommand
 {
 	private Claw mClaw = Claw.getInstance();
 
@@ -17,31 +18,22 @@ public class ClawOpen extends Command
 		requires(mClaw);
 	}
 
-	// Called once after isFinished returns true
-	protected void end()
-	{
-	}
-
-	// Called repeatedly when this Command is scheduled to run
-	protected void execute()
-	{
-	}
-
-	// Called just before this Command runs the first time
+	@Override
 	protected void initialize()
 	{
-		mClaw.open();
+		report();
+		mClaw.set(kReverse);
 	}
 
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
-	protected void interrupted()
-	{
-	}
-
-	// Make this return true when this Command no longer needs to run execute()
+	@Override
 	protected boolean isFinished()
 	{
 		return true;
 	}
+
+//	@Override
+//	protected void end()
+//	{
+//		mClaw.set(kOff);
+//	}
 }

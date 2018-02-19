@@ -3,7 +3,7 @@ package org.usfirst.frc.team1165.robot.commands.rotary_lift;
 
 import org.usfirst.frc.team1165.robot.commands.StateCommand;
 import org.usfirst.frc.team1165.robot.subsystems.RotaryLift;
-import org.usfirst.frc.team1165.robot.subsystems.RotaryLift.RotaryLiftPosition;
+import org.usfirst.frc.team1165.util.RotaryLiftPosition;
 
 import edu.wpi.first.wpilibj.DriverStation;
 

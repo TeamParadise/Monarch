@@ -3,7 +3,6 @@ package org.usfirst.frc.team1165.util;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 /**
  * Common interface for all State Machines.
@@ -14,39 +13,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 public interface Stateful
 {
 	/**
-	 * Returns a Command Chooser that is added to the SmartDashboard by
-	 * SubsystemManager.
-	 */
-	public default SendableChooser<Command> getCommandChooser()
-	{
-		SendableChooser<Command> chooser = new SendableChooser<Command>();
-
-		String subsystem = getClass().getSimpleName();
-
-		if (getIdleCommand() != null)
-		{
-			chooser.addDefault(subsystem + " Idle", getIdleCommand());
-		}
-		for (Command state : getCommands())
-		{
-			if (state != null)
-			{
-				chooser.addObject(subsystem + " " + state, state);
-			}
-		}
-
-		return chooser;
-	}
-
-	/**
 	 * Gets a list of States(Commands) that will be added to the SmartDashboard
 	 */
 	public List<Command> getCommands();
-
-	/**
-	 * Returns the Default Command that will run on the Subsystem.
-	 */
-	public Command getIdleCommand();
 
 	/**
 	 * Method for reporting a subsystem. Called by SubsystemManager

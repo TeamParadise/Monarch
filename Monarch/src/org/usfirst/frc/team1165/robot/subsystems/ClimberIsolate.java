@@ -1,12 +1,13 @@
 package org.usfirst.frc.team1165.robot.subsystems;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.usfirst.frc.team1165.robot.RobotMap;
 import org.usfirst.frc.team1165.robot.commands.climber_isolate.ClimberIsolateFire;
 import org.usfirst.frc.team1165.robot.commands.climber_isolate.ClimberIsolateIdle;
 import org.usfirst.frc.team1165.robot.commands.climber_isolate.ClimberIsolateIsolate;
+import org.usfirst.frc.team1165.util.StateMachine;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -37,11 +38,6 @@ public class ClimberIsolate extends StateMachine
 {
 	private static final ClimberIsolate mInstance = new ClimberIsolate();
 
-	public synchronized static ClimberIsolate getInstance()
-	{
-		return mInstance;
-	}
-
 	private DoubleSolenoid mClimberIsolateSolenoid = new DoubleSolenoid(RobotMap.PCM_1,
 			RobotMap.SOLENOID_CLIMBER_FIRE_PORT, RobotMap.SOLENOID_CLIMBER_ISOLATE_PORT);
 
@@ -49,27 +45,13 @@ public class ClimberIsolate extends StateMachine
 	{
 	}
 
-	public void fire()
+	public synchronized static ClimberIsolate getInstance()
 	{
-		reportState("Fire");
-		mClimberIsolateSolenoid.set(Value.kForward);
+		return mInstance;
 	}
 
-	@Override
-	public List<Command> getCommands()
-	{
-		List<Command> states = new ArrayList<Command>();
-
-		states.add(new ClimberIsolateIsolate());
-		states.add(new ClimberIsolateFire());
-
-		return states;
-	}
-
-	@Override
-	public Command getIdleCommand()
-	{
-		return new ClimberIsolateIdle();
+	public void set(Value position) {
+		mClimberIsolateSolenoid.set(position);
 	}
 
 	public void idle()
@@ -84,6 +66,21 @@ public class ClimberIsolate extends StateMachine
 		mClimberIsolateSolenoid.set(Value.kReverse);
 	}
 
+	public void fire()
+	{
+		reportState("Fire");
+		mClimberIsolateSolenoid.set(Value.kForward);
+	}
+
+	@Override
+	public List<Command> getCommands()
+	{
+		return Arrays.asList(
+			new ClimberIsolateIdle(),
+			new ClimberIsolateIsolate(),
+			new ClimberIsolateFire());
+	}
+	
 	@Override
 	public void report()
 	{

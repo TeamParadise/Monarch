@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team1165.robot;
 
+import org.usfirst.frc.team1165.robot.subsystems.DriveTrain;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -13,12 +15,44 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  */
 public class Robot extends IterativeRobot
 {
-	private static final SubsystemManager mManager = new SubsystemManager();
-
-	// private static final OI mOI = new OI();
+	private static final SubsystemManager mManager = SubsystemManager.getInstance();
 
 	// Command autonomousCommand;
 
+	/**
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
+	@Override
+	public void robotInit()
+	{
+
+		mManager.add(DriveTrain.getInstance());
+		
+//		mManager.add(FrontShooter.getInstance());
+//		mManager.add(RearShooter.getInstance());
+//		mManager.add(Claw.getInstance());
+//
+//		mManager.add(LinearLift.getInstance());
+//		mManager.add(RotaryLift.getInstance());
+//		mManager.add(Lift.getInstance());
+//
+//		mManager.add(ClimberPiston.getInstance());
+//		mManager.add(ClimberIsolate.getInstance());
+//		mManager.add(ClimberWheels.getInstance());
+//
+//		mManager.add(Intake.getInstance());
+		
+		mManager.putCommands();
+	}
+
+	@Override
+	public void robotPeriodic()
+	{
+		mManager.report();
+	}
+
+	@Override
 	public void autonomousInit()
 	{
 		// schedule the autonomous command (example)
@@ -29,42 +63,13 @@ public class Robot extends IterativeRobot
 	/**
 	 * This function is called periodically during autonomous
 	 */
+	@Override
 	public void autonomousPeriodic()
 	{
 		Scheduler.getInstance().run();
 	}
 
-	/**
-	 * This function is called when the disabled button is hit. You can use it
-	 * to reset subsystems before shutting down.
-	 */
-	public void disabledInit()
-	{
-
-	}
-
-	public void disabledPeriodic()
-	{
-		Scheduler.getInstance().run();
-	}
-
-	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
-	 */
-	public void robotInit()
-	{
-		mManager.putCommands();
-	}
-
-	public void robotPeriodic()
-	{
-		// mOI.report();
-
-		mManager.report();
-//		mManager.putSelectedCommand();
-	}
-
+	@Override
 	public void teleopInit()
 	{
 		// This makes sure that the autonomous stops running when
@@ -78,7 +83,24 @@ public class Robot extends IterativeRobot
 	/**
 	 * This function is called periodically during operator control
 	 */
+	@Override
 	public void teleopPeriodic()
+	{
+		Scheduler.getInstance().run();
+	}
+
+	/**
+	 * This function is called when the disabled button is hit. You can use it
+	 * to reset subsystems before shutting down.
+	 */
+	@Override
+	public void disabledInit()
+	{
+
+	}
+
+	@Override
+	public void disabledPeriodic()
 	{
 		Scheduler.getInstance().run();
 	}
@@ -86,6 +108,7 @@ public class Robot extends IterativeRobot
 	/**
 	 * This function is called periodically during test mode
 	 */
+	@Override
 	public void testPeriodic()
 	{
 		// LiveWindow.run();

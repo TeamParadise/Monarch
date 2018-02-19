@@ -1,6 +1,4 @@
-package org.usfirst.frc.team1165.robot.subsystems;
-
-import org.usfirst.frc.team1165.util.Stateful;
+package org.usfirst.frc.team1165.util;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 

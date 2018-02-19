@@ -1,7 +1,7 @@
 
 package org.usfirst.frc.team1165.robot.commands.rotary_lift;
 
-import static org.usfirst.frc.team1165.robot.subsystems.RotaryLift.RotaryLiftPosition.SCALE_DOWN;
+import static org.usfirst.frc.team1165.util.RotaryLiftPosition.SCALE_DOWN;
 
 /**
  *

@@ -38,6 +38,7 @@ public class Intake implements Stateful
 	{
 		List<Command> commands = new ArrayList<Command>();
 
+		commands.add(new IntakeIdle());
 		commands.add(new IntakeIntake());
 		commands.add(new IntakeOpen());
 		commands.add(new IntakeSpit());
@@ -47,12 +48,6 @@ public class Intake implements Stateful
 		commands.add(new IntakeTwistRight());
 
 		return commands;
-	}
-
-	@Override
-	public Command getIdleCommand()
-	{
-		return new IntakeIdle();
 	}
 
 	@Override

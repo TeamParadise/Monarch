@@ -1,15 +1,13 @@
 
 package org.usfirst.frc.team1165.robot.commands.linear_lift;
 
-import static org.usfirst.frc.team1165.robot.subsystems.LinearLift.LinearLiftPosition.IDLE;
-
-import org.usfirst.frc.team1165.robot.commands.StateCommand;
+import org.usfirst.frc.team1165.robot.commands.RunOnceCommand;
 import org.usfirst.frc.team1165.robot.subsystems.LinearLift;
 
 /**
  *
  */
-public class LinearLiftIdle extends StateCommand
+public class LinearLiftIdle extends RunOnceCommand
 {
 	private LinearLift mLinearLift = LinearLift.getInstance();
 
@@ -22,19 +20,6 @@ public class LinearLiftIdle extends StateCommand
 	protected void initialize()
 	{
 		report();
-		mLinearLift.setSetpoint(IDLE);
-		mLinearLift.enable();
-	}
-
-	@Override
-	protected boolean isFinished()
-	{
-		return mLinearLift.onTarget();
-	}
-
-	@Override
-	protected void end()
-	{
 		mLinearLift.disable();
 	}
 }

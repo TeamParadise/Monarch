@@ -3,6 +3,7 @@ package org.usfirst.frc.team1165.robot.commands.climber_isolate;
 
 import org.usfirst.frc.team1165.robot.subsystems.ClimberIsolate;
 
+import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.kForward;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -17,6 +18,11 @@ public class ClimberIsolateFire extends Command
 		requires(mClimberIsolate);
 	}
 
+	protected void initialize()
+	{
+		mClimberIsolate.set(kForward);
+	}
+
 	// Called once after isFinished returns true
 	protected void end()
 	{
@@ -25,12 +31,6 @@ public class ClimberIsolateFire extends Command
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
-	}
-
-	// Called just before this Command runs the first time
-	protected void initialize()
-	{
-		mClimberIsolate.fire();
 	}
 
 	// Called when another command which requires one or more of the same

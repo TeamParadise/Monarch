@@ -2,7 +2,6 @@ package org.usfirst.frc.team1165.robot;
 
 import java.util.ArrayList;
 
-import org.usfirst.frc.team1165.robot.subsystems.RotaryLift;
 import org.usfirst.frc.team1165.util.Stateful;
 
 import edu.wpi.first.wpilibj.Sendable;
@@ -15,23 +14,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class SubsystemManager
 {
+	private static final SubsystemManager mInstance = new SubsystemManager();
+	
 	private ArrayList<Stateful> mSubsystems = new ArrayList<Stateful>();
 
-	public SubsystemManager()
+	protected SubsystemManager()
 	{
-		// add(FrontShooter.getInstance());
-//		 add(RearShooter.getInstance());
-//		 add(Claw.getInstance());
-
-//		 add(LinearLift.getInstance());
-		 add(RotaryLift.getInstance());
-		// add(Lift.getInstance());
-
-//		add(ClimberPiston.getInstance());
-		// add(ClimberIsolate.getInstance());
-		// add(ClimberWheels.getInstance());
-
-		// add(Intake.getInstance());
+	}
+	
+	public static SubsystemManager getInstance() {
+		return mInstance;
 	}
 
 	public void add(Stateful subsystem)
@@ -42,7 +34,6 @@ public class SubsystemManager
 	public void putCommands()
 	{
 		mSubsystems.forEach((subsystem) -> {
-			SmartDashboard.putData(subsystem.getIdleCommand());
 			subsystem.getCommands().forEach(SmartDashboard::putData);
 		});
 	}

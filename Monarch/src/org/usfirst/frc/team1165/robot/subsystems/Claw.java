@@ -1,12 +1,13 @@
 package org.usfirst.frc.team1165.robot.subsystems;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.usfirst.frc.team1165.robot.RobotMap;
 import org.usfirst.frc.team1165.robot.commands.claw.ClawClose;
 import org.usfirst.frc.team1165.robot.commands.claw.ClawIdle;
 import org.usfirst.frc.team1165.robot.commands.claw.ClawOpen;
+import org.usfirst.frc.team1165.util.StateMachine;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -36,11 +37,6 @@ public class Claw extends StateMachine
 {
 	private static final Claw mInstance = new Claw();
 
-	public synchronized static Claw getInstance()
-	{
-		return mInstance;
-	}
-
 	private DoubleSolenoid mClawSolenoid = new DoubleSolenoid(RobotMap.PCM_1, RobotMap.SOLENOID_ARM_EXTEND_PORT,
 			RobotMap.SOLENOID_ARM_RETRACT_PORT);
 
@@ -48,47 +44,22 @@ public class Claw extends StateMachine
 	{
 	}
 
-	public void close()
+	public synchronized static Claw getInstance()
 	{
-		reportState("Close");
-		mClawSolenoid.set(Value.kForward);
+		return mInstance;
+	}
 
-		sleep(60);
-
-		mInstance.mClawSolenoid.set(Value.kOff);
+	public void set(Value position) {
+		mClawSolenoid.set(position);
 	}
 
 	@Override
-	public List<Command> getCommands()
+ 	public List<Command> getCommands()
 	{
-		List<Command> states = new ArrayList<Command>();
-
-		states.add(new ClawOpen());
-		states.add(new ClawClose());
-
-		return states;
-	}
-
-	@Override
-	public Command getIdleCommand()
-	{
-		return new ClawIdle();
-	}
-
-	public void idle()
-	{
-		reportState("Idle");
-		mInstance.mClawSolenoid.set(Value.kOff);
-	}
-
-	public void open()
-	{
-		reportState("Open");
-		mClawSolenoid.set(Value.kReverse);
-
-		sleep(60);
-
-		mInstance.mClawSolenoid.set(Value.kOff);
+		return Arrays.asList(
+			new ClawIdle(),
+			new ClawOpen(),
+			new ClawClose());
 	}
 
 	@Override

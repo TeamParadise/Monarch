@@ -9,7 +9,6 @@ public abstract class StateCommand extends Command
 {
 	public void report()
 	{
-//		System.out.println("Setting " + getSubsystem() + " State: " + getName());
 		System.out.println("Setting State: " + getName());
 	}
 }

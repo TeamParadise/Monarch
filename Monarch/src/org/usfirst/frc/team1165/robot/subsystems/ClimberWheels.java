@@ -1,12 +1,13 @@
 package org.usfirst.frc.team1165.robot.subsystems;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.usfirst.frc.team1165.robot.RobotMap;
 import org.usfirst.frc.team1165.robot.commands.climber_wheels.ClimberWheelsDisengage;
 import org.usfirst.frc.team1165.robot.commands.climber_wheels.ClimberWheelsEngage;
 import org.usfirst.frc.team1165.robot.commands.climber_wheels.ClimberWheelsIdle;
+import org.usfirst.frc.team1165.util.StateMachine;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
@@ -35,15 +36,25 @@ public class ClimberWheels extends StateMachine
 {
 	private static final ClimberWheels mInstance = new ClimberWheels();
 
+	private Solenoid mClimberWheelsSolenoid = new Solenoid(RobotMap.PCM_1, RobotMap.SOLENOID_CLIMBER_WHEELS_PORT);
+
+	protected ClimberWheels()
+	{
+	}
+
 	public synchronized static ClimberWheels getInstance()
 	{
 		return mInstance;
 	}
 
-	private Solenoid mClimberWheelsSolenoid = new Solenoid(RobotMap.PCM_1, RobotMap.SOLENOID_CLIMBER_WHEELS_PORT);
-
-	protected ClimberWheels()
+	public void set(boolean position) {
+		mClimberWheelsSolenoid.set(position);
+	}
+ 
+	public void idle()
 	{
+		reportState("Idle");
+		mClimberWheelsSolenoid.set(false);
 	}
 
 	public void disengage()
@@ -61,26 +72,12 @@ public class ClimberWheels extends StateMachine
 	@Override
 	public List<Command> getCommands()
 	{
-		List<Command> states = new ArrayList<Command>();
-
-		states.add(new ClimberWheelsEngage());
-		states.add(new ClimberWheelsDisengage());
-
-		return states;
+		return Arrays.asList(
+			new ClimberWheelsIdle(),
+			new ClimberWheelsEngage(),
+			new ClimberWheelsDisengage());
 	}
-
-	@Override
-	public Command getIdleCommand()
-	{
-		return new ClimberWheelsIdle();
-	}
-
-	public void idle()
-	{
-		reportState("Idle");
-		mClimberWheelsSolenoid.set(false);
-	}
-
+	
 	@Override
 	public void report()
 	{

@@ -1,10 +1,12 @@
 
 package org.usfirst.frc.team1165.robot.commands.linear_lift;
 
-import static org.usfirst.frc.team1165.robot.subsystems.LinearLift.LinearLiftPosition.SCALE_UP;
+import static org.usfirst.frc.team1165.util.LinearLiftPosition.SCALE_DOWN;
 
 import org.usfirst.frc.team1165.robot.commands.StateCommand;
 import org.usfirst.frc.team1165.robot.subsystems.LinearLift;
+
+import edu.wpi.first.wpilibj.DriverStation;
 
 /**
  *
@@ -22,7 +24,7 @@ public class LinearLiftScaleDown extends StateCommand
 	protected void initialize()
 	{
 		report();
-		mLinearLift.setSetpoint(SCALE_UP);
+		mLinearLift.setSetpoint(SCALE_DOWN);
 		mLinearLift.enable();
 	}
 
@@ -35,6 +37,7 @@ public class LinearLiftScaleDown extends StateCommand
 	@Override
 	protected void end()
 	{
+		DriverStation.reportWarning("End Position: "+ mLinearLift.getLiftPosition(), false);
 		mLinearLift.disable();
 	}
 }

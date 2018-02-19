@@ -1,6 +1,4 @@
-package org.usfirst.frc.team1165.robot.subsystems;
-
-import org.usfirst.frc.team1165.util.Stateful;
+package org.usfirst.frc.team1165.util;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -19,7 +17,7 @@ public abstract class StateMachine extends Subsystem implements Stateful
 	}
 
 	@Override
-	public void initDefaultCommand()
+	protected void initDefaultCommand()
 	{
 	}
 }

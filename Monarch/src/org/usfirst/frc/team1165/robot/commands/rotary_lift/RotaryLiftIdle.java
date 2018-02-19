@@ -1,13 +1,13 @@
 
 package org.usfirst.frc.team1165.robot.commands.rotary_lift;
 
-import org.usfirst.frc.team1165.robot.commands.StateCommand;
+import org.usfirst.frc.team1165.robot.commands.RunOnceCommand;
 import org.usfirst.frc.team1165.robot.subsystems.RotaryLift;
 
 /**
  *
  */
-public class RotaryLiftIdle extends StateCommand
+public class RotaryLiftIdle extends RunOnceCommand
 {
 	private RotaryLift mRotaryLift = RotaryLift.getInstance();
 
@@ -19,11 +19,7 @@ public class RotaryLiftIdle extends StateCommand
 	protected void initialize()
 	{
 		mRotaryLift.disable();
-	}
-
-	protected void execute()
-	{
-
+		mRotaryLift.stop();
 	}
 
 	protected boolean isFinished()
