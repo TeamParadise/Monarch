@@ -30,10 +30,4 @@ public class ClawOpen extends StateCommand
 	{
 		return true;
 	}
-
-//	@Override
-//	protected void end()
-//	{
-//		mClaw.set(kOff);
-//	}
 }

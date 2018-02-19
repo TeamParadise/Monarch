@@ -49,7 +49,8 @@ public class ClimberPiston extends StateMachine
 		return mInstance;
 	}
 
-	public void set(Value position) {
+	public void set(Value position)
+	{
 		mClimberSolenoid.set(position);
 	}
 
@@ -71,10 +72,7 @@ public class ClimberPiston extends StateMachine
 	@Override
 	public List<Command> getCommands()
 	{
-		return Arrays.asList(
-			new ClimberPistonIdle(),
-			new ClimberPistonExtend(),
-			new ClimberPistonRetract());
+		return Arrays.asList(new ClimberPistonIdle(), new ClimberPistonExtend(), new ClimberPistonRetract());
 	}
 
 	@Override

@@ -47,10 +47,11 @@ public class ClimberWheels extends StateMachine
 		return mInstance;
 	}
 
-	public void set(boolean position) {
+	public void set(boolean position)
+	{
 		mClimberWheelsSolenoid.set(position);
 	}
- 
+
 	public void idle()
 	{
 		reportState("Idle");
@@ -72,12 +73,9 @@ public class ClimberWheels extends StateMachine
 	@Override
 	public List<Command> getCommands()
 	{
-		return Arrays.asList(
-			new ClimberWheelsIdle(),
-			new ClimberWheelsEngage(),
-			new ClimberWheelsDisengage());
+		return Arrays.asList(new ClimberWheelsIdle(), new ClimberWheelsEngage(), new ClimberWheelsDisengage());
 	}
-	
+
 	@Override
 	public void report()
 	{

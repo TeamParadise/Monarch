@@ -24,7 +24,7 @@ public class LinearLiftScaleDown extends StateCommand
 	protected void initialize()
 	{
 		report();
-		mLinearLift.setSetpoint(SCALE_DOWN);
+		mLinearLift.set(SCALE_DOWN);
 		mLinearLift.enable();
 	}
 

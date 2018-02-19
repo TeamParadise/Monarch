@@ -25,11 +25,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class FrontShooter extends StateMachine
 {
 	private static final FrontShooter mInstance = new FrontShooter();
-	
+
 	private WPI_TalonSRX mFrontRightMotor = new WPI_TalonSRX(RobotMap.FRONT_RIGHT_SHOOTER_PORT);
 
 	private WPI_TalonSRX mFrontLeftMotor = new WPI_TalonSRX(RobotMap.FRONT_LEFT_SHOOTER_PORT);
-	
+
 	protected FrontShooter()
 	{
 		mFrontRightMotor.setInverted(true);
@@ -40,16 +40,18 @@ public class FrontShooter extends StateMachine
 		return mInstance;
 	}
 
-	public void set(MotorPower power) {
+	public void set(MotorPower power)
+	{
 		mFrontRightMotor.set(power.get());
 		mFrontLeftMotor.set(power.get());
 	}
 
-	public void set(MotorPower rightPower, MotorPower leftPower) {
+	public void set(MotorPower rightPower, MotorPower leftPower)
+	{
 		mFrontRightMotor.set(rightPower.get());
 		mFrontLeftMotor.set(leftPower.get());
 	}
-	
+
 	public void idle()
 	{
 		mFrontRightMotor.set(0);
@@ -83,14 +85,10 @@ public class FrontShooter extends StateMachine
 	@Override
 	public List<Command> getCommands()
 	{
-		return Arrays.asList(
-			new FrontShooterIdle(),
-			new FrontShooterIntake(),
-			new FrontShooterEject(),
-			new FrontShooterTwistRight(),
-			new FrontShooterTwistLeft());
+		return Arrays.asList(new FrontShooterIdle(), new FrontShooterIntake(), new FrontShooterEject(),
+				new FrontShooterTwistRight(), new FrontShooterTwistLeft());
 	}
-	
+
 	@Override
 	public void report()
 	{

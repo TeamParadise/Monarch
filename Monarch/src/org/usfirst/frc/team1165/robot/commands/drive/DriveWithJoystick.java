@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1165.robot.commands.drive;
 
-import org.usfirst.frc.team1165.robot.OperatorInterface;
 import org.usfirst.frc.team1165.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team1165.util.drivers.OperatorInterface;
 
 import edu.wpi.first.wpilibj.command.Command;
 

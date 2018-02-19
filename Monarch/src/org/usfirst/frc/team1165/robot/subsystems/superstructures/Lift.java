@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1165.robot.subsystems.superstructures;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.usfirst.frc.team1165.robot.commands.lift.LiftIdle;
@@ -33,15 +33,8 @@ public class Lift implements Stateful
 	@Override
 	public List<Command> getCommands()
 	{
-		List<Command> commands = new ArrayList<Command>();
-
-		commands.add(new LiftIdle());
-		commands.add(new LiftIntake());
-		commands.add(new LiftScaleDown());
-		commands.add(new LiftScaleUp());
-		commands.add(new LiftSwitch());
-
-		return commands;
+		return Arrays.asList(new LiftIdle(), new LiftIntake(), new LiftScaleDown(), new LiftScaleUp(),
+				new LiftSwitch());
 	}
 
 	@Override

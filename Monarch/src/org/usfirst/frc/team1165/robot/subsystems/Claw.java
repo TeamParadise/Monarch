@@ -48,18 +48,16 @@ public class Claw extends StateMachine
 	{
 		return mInstance;
 	}
-
-	public void set(Value position) {
+	
+	public  void set(Value position)
+	{
 		mClawSolenoid.set(position);
 	}
 
 	@Override
- 	public List<Command> getCommands()
+	public List<Command> getCommands()
 	{
-		return Arrays.asList(
-			new ClawIdle(),
-			new ClawOpen(),
-			new ClawClose());
+		return Arrays.asList(new ClawIdle(), new ClawOpen(), new ClawClose());
 	}
 
 	@Override
@@ -67,4 +65,5 @@ public class Claw extends StateMachine
 	{
 		SmartDashboard.putString("Claw Piston", mClawSolenoid.get().toString());
 	}
+		
 }

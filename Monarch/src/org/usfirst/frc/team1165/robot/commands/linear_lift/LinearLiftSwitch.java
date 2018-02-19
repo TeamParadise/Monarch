@@ -24,7 +24,7 @@ public class LinearLiftSwitch extends StateCommand
 	protected void initialize()
 	{
 		report();
-		mLinearLift.setSetpoint(SWITCH);
+		mLinearLift.set(SWITCH);
 		mLinearLift.enable();
 	}
 

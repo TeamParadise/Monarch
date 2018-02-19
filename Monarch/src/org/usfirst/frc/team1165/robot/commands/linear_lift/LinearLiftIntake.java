@@ -24,7 +24,7 @@ public class LinearLiftIntake extends StateCommand
 	protected void initialize()
 	{
 		report();
-		mLinearLift.setSetpoint(INTAKE);
+		mLinearLift.set(INTAKE);
 		mLinearLift.enable();
 	}
 

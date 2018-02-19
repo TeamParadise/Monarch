@@ -3,12 +3,17 @@ package org.usfirst.frc.team1165.robot.subsystems;
 import java.util.Arrays;
 import java.util.List;
 
-import org.usfirst.frc.team1165.robot.RobotMap;
+import static org.usfirst.frc.team1165.robot.RobotMap.RIGHT_MASTER_DRIVE_PORT;
+import static org.usfirst.frc.team1165.robot.RobotMap.RIGHT_SLAVE_DRIVE_PORT;
+import static org.usfirst.frc.team1165.robot.RobotMap.LEFT_MASTER_DRIVE_PORT;
+import static org.usfirst.frc.team1165.robot.RobotMap.LEFT_SLAVE_DRIVE_PORT;
+
 import org.usfirst.frc.team1165.robot.commands.drive.DriveWithJoystick;
 import org.usfirst.frc.team1165.util.StateMachine;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,25 +22,36 @@ public class DriveTrain extends StateMachine
 {
 	private static final DriveTrain mInstance = new DriveTrain();
 
-	private WPI_TalonSRX mRightMaster = new WPI_TalonSRX(RobotMap.RIGHT_MASTER_DRIVE_PORT);
-//	private WPI_TalonSRX mRightSlave = new WPI_TalonSRX(RobotMap.RIGHT_SLAVE_DRIVE_PORT);
-	private WPI_TalonSRX mLeftMaster = new WPI_TalonSRX(RobotMap.LEFT_MASTER_DRIVE_PORT);
-//	private WPI_TalonSRX mLeftSlave = new WPI_TalonSRX(RobotMap.LEFT_SLAVE_DRIVE_PORT);
+	private WPI_TalonSRX mLeftMaster = new WPI_TalonSRX(LEFT_MASTER_DRIVE_PORT);
+	private WPI_TalonSRX mLeftSlave = new WPI_TalonSRX(LEFT_SLAVE_DRIVE_PORT);
+	private WPI_TalonSRX mRightMaster = new WPI_TalonSRX(RIGHT_MASTER_DRIVE_PORT);
+	private WPI_TalonSRX mRightSlave = new WPI_TalonSRX(RIGHT_SLAVE_DRIVE_PORT);
 
-	private DifferentialDrive mDrive = new DifferentialDrive(mLeftMaster, mRightMaster);
+	// private DifferentialDrive mDrive = new DifferentialDrive(mLeftMaster,
+	// mRightMaster);
+
+	private SpeedControllerGroup mLeftDrive = new SpeedControllerGroup(mLeftMaster, mLeftSlave);
+	private SpeedControllerGroup mRightDrive = new SpeedControllerGroup(mRightMaster, mRightSlave);
+
+	private DifferentialDrive mDrive = new DifferentialDrive(mLeftDrive, mRightDrive);
 
 	protected DriveTrain()
 	{
-//		mRightSlave.follow(mRightMaster);
-//		mLeftSlave.follow(mLeftMaster);
+		// experiment and figure out which of the sides needs to be inverted
+//		mLeftDrive.setInverted(true);
+//		mRightDrive.setInverted(true);
 
-//		mRightSlave.setInverted(true);
-//		mLeftSlave.setInverted(true);
-		
-//		mRightSlave.setInverted(true);
-//		mLeftSlave.setInverted(true);
+		// mRightSlave.follow(mRightMaster);
+		// mLeftSlave.follow(mLeftMaster);
 
-//		mRightMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		// mRightSlave.setInverted(true);
+		// mLeftSlave.setInverted(true);
+
+		// mRightSlave.setInverted(true);
+		// mLeftSlave.setInverted(true);
+
+		// mRightMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,
+		// 0, 0);
 	}
 
 	public static DriveTrain getInstance()
@@ -73,7 +89,7 @@ public class DriveTrain extends StateMachine
 	public void tankDrive(double leftSpeed, double rightSpeed)
 	{
 		mDrive.tankDrive(leftSpeed, rightSpeed);
-//		mDrive.tankDrive(Math.pow(leftSpeed, 3), rightSpeed, false);
+		// mDrive.tankDrive(Math.pow(leftSpeed, 3), rightSpeed, false);
 	}
 
 	public double getPosition()
@@ -103,7 +119,7 @@ public class DriveTrain extends StateMachine
 		SmartDashboard.putNumber("DriveTrain Right Master", mRightMaster.get());
 		SmartDashboard.putNumber("DriveTrain Left Master", mLeftMaster.get());
 
-//		SmartDashboard.putNumber("DriveTrain Right Position", getPosition());
-//		SmartDashboard.putNumber("DriveTrain Right Velocity", getVelocity());
+		// SmartDashboard.putNumber("DriveTrain Right Position", getPosition());
+		// SmartDashboard.putNumber("DriveTrain Right Velocity", getVelocity());
 	}
 }

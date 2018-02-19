@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1165.robot.subsystems;
 
+import static org.usfirst.frc.team1165.robot.RobotMap.ROTARY_LIFT_PORT;
+import static org.usfirst.frc.team1165.robot.RobotMap.ROTARY_LIFT_POT_PORT;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,6 +15,7 @@ import org.usfirst.frc.team1165.util.StateMachinePID;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -24,17 +28,11 @@ public class RotaryLift extends StateMachinePID
 {
 	private static final RotaryLift mInstance = new RotaryLift();
 
-	// private WPI_TalonSRX mRotaryLiftMotor = new WPI_TalonSRX(RobotMap.ROTARY_LIFT_PORT);
-	private WPI_TalonSRX mRotaryLiftMotor = new WPI_TalonSRX(6);
+	private WPI_TalonSRX mRotaryLiftMotor = new WPI_TalonSRX(ROTARY_LIFT_PORT);
 
-//	private AnalogPotentiometer mPotentiometer = new AnalogPotentiometer(0, 360, 0);
-	
+	private AnalogPotentiometer mPotentiometer = new AnalogPotentiometer(ROTARY_LIFT_POT_PORT, 360, 0);
+
 	private double mOutput;
-
-	public synchronized static RotaryLift getInstance()
-	{
-		return mInstance;
-	}
 
 	protected RotaryLift()
 	{
@@ -46,32 +44,32 @@ public class RotaryLift extends StateMachinePID
 
 		getPIDController().setContinuous();
 	}
-	
-	public double getLiftPosition() {
-//		return mPotentiometer.get();
-		double angle = mRotaryLiftMotor.getSensorCollection().getQuadraturePosition();
-		if(angle >=0)
-			return angle % 360;
-		return 360- Math.abs(angle  % 360);
+
+	public synchronized static RotaryLift getInstance()
+	{
+		return mInstance;
 	}
 
-	public void setSetpoint(RotaryLiftPosition position)
+	public void set(RotaryLiftPosition position)
 	{
 		setSetpoint(position.getValue());
 	}
 
-	public void stop() {
+	public void stop()
+	{
 		mRotaryLiftMotor.set(0);
+	}
+
+	public double getLiftPosition()
+	{
+		return mPotentiometer.get();
 	}
 
 	@Override
 	public List<Command> getCommands()
 	{
-		return Arrays.asList(
-			new RotaryLiftIdle(),
-			new RotaryLiftDown(),
-			new RotaryLiftScaleDown(),
-			new RotaryLiftScaleUp());
+		return Arrays.asList(new RotaryLiftIdle(), new RotaryLiftDown(), new RotaryLiftScaleDown(),
+				new RotaryLiftScaleUp());
 	}
 
 	@Override
@@ -79,7 +77,7 @@ public class RotaryLift extends StateMachinePID
 	{
 		return getLiftPosition();
 	}
-	
+
 	@Override
 	protected void usePIDOutput(double output)
 	{
@@ -95,7 +93,7 @@ public class RotaryLift extends StateMachinePID
 
 		SmartDashboard.putNumber("Linear Lift Target", getSetpoint());
 		SmartDashboard.putBoolean("Linear Lift On Target", onTarget());
-		
+
 		SmartDashboard.putNumber("Linear Lift Output", mOutput);
 	}
 

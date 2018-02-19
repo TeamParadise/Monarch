@@ -50,7 +50,8 @@ public class ClimberIsolate extends StateMachine
 		return mInstance;
 	}
 
-	public void set(Value position) {
+	public void set(Value position)
+	{
 		mClimberIsolateSolenoid.set(position);
 	}
 
@@ -75,12 +76,9 @@ public class ClimberIsolate extends StateMachine
 	@Override
 	public List<Command> getCommands()
 	{
-		return Arrays.asList(
-			new ClimberIsolateIdle(),
-			new ClimberIsolateIsolate(),
-			new ClimberIsolateFire());
+		return Arrays.asList(new ClimberIsolateIdle(), new ClimberIsolateIsolate(), new ClimberIsolateFire());
 	}
-	
+
 	@Override
 	public void report()
 	{

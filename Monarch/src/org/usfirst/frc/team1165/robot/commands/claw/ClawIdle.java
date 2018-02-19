@@ -21,6 +21,7 @@ public class ClawIdle extends RunOnceCommand
 	@Override
 	protected void execute()
 	{
+		report();
 		mClaw.set(kOff);
 	}
 

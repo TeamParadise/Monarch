@@ -21,7 +21,7 @@ public class RotaryLiftCommand extends StateCommand
 
 	protected void initialize(RotaryLiftPosition position)
 	{
-		mRotaryLift.setSetpoint(position);
+		mRotaryLift.set(position);
 		mRotaryLift.enable();
 	}
 

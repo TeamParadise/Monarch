@@ -1,9 +1,10 @@
 package org.usfirst.frc.team1165.robot.subsystems;
 
+import static org.usfirst.frc.team1165.robot.RobotMap.LINEAR_LIFT_PORT;
+
 import java.util.Arrays;
 import java.util.List;
 
-import org.usfirst.frc.team1165.robot.RobotMap;
 import org.usfirst.frc.team1165.robot.commands.linear_lift.LinearLiftIdle;
 import org.usfirst.frc.team1165.robot.commands.linear_lift.LinearLiftIntake;
 import org.usfirst.frc.team1165.robot.commands.linear_lift.LinearLiftScaleDown;
@@ -26,7 +27,7 @@ public class LinearLift extends StateMachinePID
 {
 	private static final LinearLift mInstance = new LinearLift();
 
-	private WPI_TalonSRX mLinearLiftMotor = new WPI_TalonSRX(RobotMap.LINEAR_LIFT_PORT);
+	private WPI_TalonSRX mLinearLiftMotor = new WPI_TalonSRX(LINEAR_LIFT_PORT);
 
 	protected LinearLift()
 	{
@@ -35,8 +36,9 @@ public class LinearLift extends StateMachinePID
 		setInputRange(-10, 65);
 		setOutputRange(-0.3, 0.3);
 		setAbsoluteTolerance(10);
-		
-//		mLinearLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+
+		// mLinearLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,
+		// 0, 0);
 	}
 
 	public synchronized static LinearLift getInstance()
@@ -44,22 +46,28 @@ public class LinearLift extends StateMachinePID
 		return mInstance;
 	}
 
+	public void set(LinearLiftPosition position)
+	{
+		setSetpoint(position.get());
+	}
+
 	/**
-	 * 
 	 * <p>
-	 * in = ticks * (1 rev)/(12 ticks) * (1.751 * pi in)/(1 rev) * gear_ratio<br>
-	 * in = (ticks * pi * 1.751 * gear_ratio) / 912 ticks)
+	 * Converts the ticks returned from the 775pro Encoder to inches.
 	 * </p>
+	 * 
+	 * @return the position of the linear lift
 	 */
 	public double getLiftPosition()
 	{
 		return mLinearLiftMotor.getSensorCollection().getQuadraturePosition();
-//		return (mLinearLiftMotor.getSensorCollection().getQuadraturePosition() * Math.PI * 1.751 * 4) / 12;
-	}
 
-	public void setSetpoint(LinearLiftPosition position)
-	{
-		setSetpoint(position.get());
+		/*
+		 * in = ticks * (1 rev)/(12 ticks) * (1.751 * pi in)/(1 rev) *
+		 * gear_ratio<br>
+		 * in = (ticks * pi * 1.751 * gear_ratio) / 12 ticks)
+		 */
+		// return (mLinearLiftMotor.getSensorCollection().getQuadraturePosition() * Math.PI * 1.751 * 4) / 12;
 	}
 
 	@Override
@@ -78,7 +86,7 @@ public class LinearLift extends StateMachinePID
 	@Override
 	protected void usePIDOutput(double output)
 	{
-		mLinearLiftMotor.set(-output);
+		mLinearLiftMotor.set(output);
 	}
 
 	@Override

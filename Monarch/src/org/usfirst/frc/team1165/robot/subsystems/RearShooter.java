@@ -23,13 +23,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class RearShooter extends StateMachine
 {
 	private static final RearShooter mInstance = new RearShooter();
-	
+
 	private WPI_TalonSRX mRearRightMotor = new WPI_TalonSRX(RobotMap.REAR_RIGHT_SHOOTER_PORT);
 	private WPI_TalonSRX mRearLeftMotor = new WPI_TalonSRX(RobotMap.REAR_LEFT_SHOOTER_PORT);
 
 	protected RearShooter()
 	{
-//		mRearRightMotor.setInverted(true); // commented out as a test
+		// mRearRightMotor.setInverted(true); // commented out as a test
 	}
 
 	public synchronized static RearShooter getInstance()
@@ -37,11 +37,13 @@ public class RearShooter extends StateMachine
 		return mInstance;
 	}
 
-	public void set(MotorPower power) {
+	public void set(MotorPower power)
+	{
 		set(power, power);
 	}
 
-	public void set(MotorPower rightPower, MotorPower leftPower) {
+	public void set(MotorPower rightPower, MotorPower leftPower)
+	{
 		mRearRightMotor.set(rightPower.get());
 		mRearLeftMotor.set(leftPower.get());
 	}
@@ -67,10 +69,7 @@ public class RearShooter extends StateMachine
 	@Override
 	public List<Command> getCommands()
 	{
-		return Arrays.asList(
-			new RearShooterIdle(),
-			new RearShooterIntake(),
-			new RearShooterEject());
+		return Arrays.asList(new RearShooterIdle(), new RearShooterIntake(), new RearShooterEject());
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class LinearLiftScaleUp extends StateCommand
 	protected void initialize()
 	{
 		report();
-		mLinearLift.setSetpoint(SCALE_UP);
+		mLinearLift.set(SCALE_UP);
 		mLinearLift.enable();
 	}
 

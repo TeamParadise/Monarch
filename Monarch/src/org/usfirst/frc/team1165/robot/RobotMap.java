@@ -31,6 +31,8 @@ public class RobotMap
 	public static final int LINEAR_LIFT_ENCODER_PORT = 0; // placeholder value
 	public static final int ROTARY_LIFT_POT_PORT = 0; // placeholder value
 
+	public static final int PRESSURE_SENSOR_PORT = 0;
+	
 	// PNEUMATICS
 
 	public static final int PCM_1 = 1;
