@@ -23,7 +23,7 @@ public enum RotaryLiftState
 		this.value = value;
 	}
 
-	public double getValue()
+	public double get()
 	{
 		return value;
 	}

@@ -67,7 +67,7 @@ public class RotaryLift extends StateMachinePID
 	 */
 	public void set(RotaryLiftState state)
 	{
-		setSetpoint(state.getValue());
+		setSetpoint(state.get());
 	}
 
 	public void stop()

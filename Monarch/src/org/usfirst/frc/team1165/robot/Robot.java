@@ -46,18 +46,6 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
-		
-//		manager.add(DriveTrain.getInstance(), new DriveWithJoystick());
-//		manager.add(Claw.getInstance(), new ClawCommand(null));
-//		manager.add(ClimberPiston.getInstance(), new ClimberPistonCommand(null));
-//		manager.add(ClimberWheels.getInstance(), new ClimberWheelsCommand(false));
-//		manager.add(ClimberWings.getInstance(), new ClimberWingsCommand(false));
-//		manager.add(FrontShooter.getInstance(), new FrontShooterCommand(null));
-//		manager.add(LinearLift.getInstance(), new LinearLiftCommand(null));
-//		manager.add(RearShooter.getInstance(), new RearShooterCommand(null));
-//		manager.add(RotaryLift.getInstance(), new RotaryLiftCommand(null));
-		
-				
 		mManager.add(DriveTrain.getInstance());
 		
 //		mManager.add(FrontShooter.getInstance());
@@ -73,14 +61,14 @@ public class Robot extends IterativeRobot
 //		mManager.add(ClimberWheels.getInstance());
 //
 //		mManager.add(Intake.getInstance());
-		
-		mManager.putCommands();
 	}
 
 	@Override
 	public void robotPeriodic()
 	{
 		mManager.report();
+		
+		mManager.putCommands();
 	}
 
 	@Override
